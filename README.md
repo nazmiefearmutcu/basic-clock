@@ -1,11 +1,13 @@
 # Basic Clock
 
-Professional responsive digital clock, alarm, and countdown timer app with in-browser Web Audio alerts.
+Professional responsive digital clock, alarm, countdown timer, and native desktop app with in-browser Web Audio alerts.
 
 ## Features
 
 - Full-width digital clock with local date and timezone.
 - Clock, Alarms, Timer, and Settings pages.
+- Six visual themes: Matrix, Interstellar, Midnight, Aurora, Paper, and Ember.
+- Theme cards with live previews, cinematic backgrounds, and rotating theme-specific quote lines.
 - Daily alarms plus quick one-time alarms for +1 minute, +10 minutes, and +5 second testing.
 - Alarm popup follows the user across pages and supports stop plus 5 minute snooze.
 - Countdown timer with a 3 second test flow.
@@ -27,6 +29,12 @@ On supported desktop and mobile browsers, use the browser's install option to ad
 ## Native Apps
 
 The repository includes an Electron desktop shell that packages the same Basic Clock web app as a native desktop application.
+
+Open the installed macOS app:
+
+```bash
+open "/Applications/Basic Clock.app"
+```
 
 Run the native app locally:
 
@@ -63,4 +71,6 @@ npm install
 npm run test:e2e
 ```
 
-The automated test creates one alarm and one timer, verifies that both trigger Web Audio sound events, and writes a screenshot to `test-results/basic-clock-e2e.png`.
+The automated test switches to the Interstellar theme, verifies quote cycling and logo-to-home navigation, creates one alarm and one timer, verifies that both trigger Web Audio sound events, and writes a screenshot to `test-results/basic-clock-e2e.png`.
+
+Current manual and automated coverage is tracked in `TEST_PLAN.md`.

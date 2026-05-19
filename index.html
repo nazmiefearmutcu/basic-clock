@@ -14,6 +14,7 @@
     <div class="app-shell">
       <header class="topbar">
         <a class="brand-home" id="brandHome" data-testid="brand-home" href="#clock" aria-label="Go to Clock home">
+          <span class="brand-mark" aria-hidden="true"></span>
           <h1>Basic Clock</h1>
         </a>
         <nav class="tabs" aria-label="Main navigation">
@@ -27,13 +28,21 @@
       <main>
         <section id="clock" class="page active" aria-labelledby="clock-heading">
           <div class="clock-panel">
-            <div class="date-row">
-              <span id="dateLabel">--</span>
-              <span id="timezoneLabel">--</span>
-            </div>
             <h2 id="clock-heading" class="sr-only">Digital clock</h2>
+            <button id="quoteBlock" class="quote-block" type="button" data-testid="quote-block" aria-label="Cycle theme quote">
+              <span id="quoteKicker" class="quote-kicker">Working late</span>
+              <span id="quoteText" class="quote-text">Free your mind.</span>
+            </button>
             <div id="digitalClock" class="digital-clock" data-testid="digital-clock">--:--:--</div>
             <div class="clock-meta">
+              <div>
+                <span class="meta-label">Today</span>
+                <strong id="dateLabel">--</strong>
+              </div>
+              <div>
+                <span class="meta-label">Timezone</span>
+                <strong id="timezoneLabel">--</strong>
+              </div>
               <div>
                 <span class="meta-label">Next alarm</span>
                 <strong id="nextAlarmLabel" data-testid="next-alarm">No alarms</strong>
@@ -123,16 +132,20 @@
             </div>
           </div>
 
+          <div class="theme-field">
+            <span class="field-label">Theme</span>
+            <select id="themeSelect" class="sr-only" data-testid="theme-select" aria-label="Theme">
+              <option value="matrix">Matrix</option>
+              <option value="interstellar">Interstellar</option>
+              <option value="midnight">Midnight</option>
+              <option value="aurora">Aurora</option>
+              <option value="paper">Paper</option>
+              <option value="ember">Ember</option>
+            </select>
+            <div id="themeCards" class="theme-grid" data-testid="theme-grid"></div>
+          </div>
+
           <div class="settings-grid">
-            <label>
-              Theme
-              <select id="themeSelect" data-testid="theme-select">
-                <option value="matrix">Matrix</option>
-                <option value="midnight">Midnight</option>
-                <option value="paper">Paper</option>
-                <option value="ember">Ember</option>
-              </select>
-            </label>
             <label>
               Alarm sound
               <select id="defaultAlarmSound">

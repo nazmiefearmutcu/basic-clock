@@ -7,6 +7,9 @@ const el = {
   pages: [...document.querySelectorAll(".page")],
   dateLabel: document.getElementById("dateLabel"),
   timezoneLabel: document.getElementById("timezoneLabel"),
+  quoteBlock: document.getElementById("quoteBlock"),
+  quoteKicker: document.getElementById("quoteKicker"),
+  quoteText: document.getElementById("quoteText"),
   digitalClock: document.getElementById("digitalClock"),
   nextAlarmLabel: document.getElementById("nextAlarmLabel"),
   audioStatus: document.getElementById("audioStatus"),
@@ -29,6 +32,7 @@ const el = {
   resetTimer: document.getElementById("resetTimer"),
   startThreeSecondTimer: document.getElementById("startThreeSecondTimer"),
   themeSelect: document.getElementById("themeSelect"),
+  themeCards: document.getElementById("themeCards"),
   defaultAlarmSound: document.getElementById("defaultAlarmSound"),
   defaultTimerSound: document.getElementById("defaultTimerSound"),
   volumeRange: document.getElementById("volumeRange"),
@@ -65,6 +69,8 @@ const defaults = {
 
 let state = loadState();
 let currentRing = null;
+let quoteIndex = 0;
+let quoteTheme = null;
 const soundEvents = [];
 const audio = {
   context: null,
@@ -73,6 +79,77 @@ const audio = {
   repeatHandle: null,
   unlocked: false
 };
+
+const themeCatalog = [
+  {
+    id: "matrix",
+    name: "Matrix",
+    mood: "Green rain",
+    preview: "01:13:49",
+    quotes: [
+      { kicker: "Working late", text: "Free your mind." },
+      { kicker: "Wake signal", text: "Wake up, Neo." },
+      { kicker: "System awake", text: "There is no spoon." }
+    ]
+  },
+  {
+    id: "interstellar",
+    name: "Interstellar",
+    mood: "Deep orbit",
+    preview: "05:21:12",
+    quotes: [
+      { kicker: "Docking window", text: "Stay." },
+      { kicker: "Across time", text: "Make it count." },
+      { kicker: "Launch burn", text: "We will find a way." }
+    ]
+  },
+  {
+    id: "midnight",
+    name: "Midnight",
+    mood: "Quiet focus",
+    preview: "23:48:06",
+    quotes: [
+      { kicker: "Night watch", text: "Keep the lights low." },
+      { kicker: "Deep focus", text: "Time slips softly." },
+      { kicker: "After hours", text: "Hold the line." }
+    ]
+  },
+  {
+    id: "aurora",
+    name: "Aurora",
+    mood: "Polar glow",
+    preview: "04:06:30",
+    quotes: [
+      { kicker: "Northern line", text: "Let the sky move." },
+      { kicker: "Soft signal", text: "Find the bright edge." },
+      { kicker: "Morning drift", text: "Hold the glow." }
+    ]
+  },
+  {
+    id: "paper",
+    name: "Paper",
+    mood: "Clean desk",
+    preview: "09:30:00",
+    quotes: [
+      { kicker: "Desk clock", text: "Make the day legible." },
+      { kicker: "Clean slate", text: "One page at a time." },
+      { kicker: "Margin note", text: "Keep it simple." }
+    ]
+  },
+  {
+    id: "ember",
+    name: "Ember",
+    mood: "Warm signal",
+    preview: "18:44:12",
+    quotes: [
+      { kicker: "Late spark", text: "Keep the fire steady." },
+      { kicker: "Warm signal", text: "The clock is glowing." },
+      { kicker: "Afterglow", text: "Every minute burns bright." }
+    ]
+  }
+];
+
+const themes = Object.fromEntries(themeCatalog.map((theme) => [theme.id, theme]));
 
 function loadState() {
   try {
@@ -104,6 +181,7 @@ function showToast(message) {
 }
 
 function applySettings() {
+  if (!themes[state.settings.theme]) state.settings.theme = defaults.settings.theme;
   el.html.dataset.theme = state.settings.theme;
   el.themeSelect.value = state.settings.theme;
   el.defaultAlarmSound.value = state.settings.defaultAlarmSound;
@@ -113,8 +191,63 @@ function applySettings() {
   el.hourToggle.checked = state.settings.hour12;
   el.secondsToggle.checked = state.settings.showSeconds;
   el.alarmSound.value = state.settings.defaultAlarmSound;
+  renderThemeCards();
+  renderQuote();
   updateAudioStatus();
   updateMasterGain();
+}
+
+function setTheme(themeId) {
+  if (!themes[themeId] || state.settings.theme === themeId) return;
+  state.settings.theme = themeId;
+  quoteIndex = 0;
+  saveState();
+  applySettings();
+}
+
+function renderThemeCards() {
+  el.themeCards.replaceChildren();
+  for (const theme of themeCatalog) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "theme-card";
+    card.dataset.themeCard = theme.id;
+    card.dataset.testid = `theme-card-${theme.id}`;
+    card.setAttribute("aria-pressed", String(state.settings.theme === theme.id));
+
+    const sample = document.createElement("span");
+    sample.className = "theme-card-sample";
+    sample.textContent = theme.preview;
+
+    const name = document.createElement("span");
+    name.className = "theme-card-name";
+    name.textContent = theme.name;
+
+    const mood = document.createElement("span");
+    mood.className = "theme-card-mood";
+    mood.textContent = theme.mood;
+
+    card.append(sample, name, mood);
+    card.addEventListener("click", () => setTheme(theme.id));
+    el.themeCards.append(card);
+  }
+}
+
+function renderQuote() {
+  const theme = themes[state.settings.theme] || themes.matrix;
+  if (quoteTheme !== theme.id) {
+    quoteTheme = theme.id;
+    quoteIndex = 0;
+  }
+  const quote = theme.quotes[quoteIndex % theme.quotes.length];
+  el.quoteKicker.textContent = quote.kicker;
+  el.quoteText.textContent = quote.text;
+}
+
+function cycleQuote() {
+  const theme = themes[state.settings.theme] || themes.matrix;
+  quoteIndex = (quoteIndex + 1) % theme.quotes.length;
+  renderQuote();
 }
 
 async function ensureAudio() {
@@ -540,6 +673,7 @@ function bindEvents() {
   });
 
   el.tabs.forEach((tab) => tab.addEventListener("click", () => switchPage(tab.dataset.tabTarget)));
+  el.quoteBlock.addEventListener("click", cycleQuote);
 
   window.addEventListener("pointerdown", () => void ensureAudio(), { once: true });
   window.addEventListener("keydown", () => void ensureAudio(), { once: true });
@@ -603,9 +737,7 @@ function bindEvents() {
   });
 
   el.themeSelect.addEventListener("change", () => {
-    state.settings.theme = el.themeSelect.value;
-    saveState();
-    applySettings();
+    setTheme(el.themeSelect.value);
   });
   el.defaultAlarmSound.addEventListener("change", () => {
     state.settings.defaultAlarmSound = el.defaultAlarmSound.value;
@@ -656,6 +788,15 @@ window.__clockAppTest = {
   get timer() {
     return state.timer;
   },
+  get theme() {
+    return state.settings.theme;
+  },
+  get quote() {
+    return {
+      kicker: el.quoteKicker.textContent,
+      text: el.quoteText.textContent
+    };
+  },
   async unlockAudio() {
     return ensureAudio();
   },
@@ -685,6 +826,7 @@ renderTimer();
 updateClock();
 bindEvents();
 window.setInterval(tick, 250);
+window.setInterval(cycleQuote, 18_000);
 
 if ("serviceWorker" in navigator && ["http:", "https:"].includes(window.location.protocol)) {
   window.addEventListener("load", () => {

@@ -44,6 +44,16 @@ try {
   await page.waitForFunction(() => Boolean(window.__clockAppTest));
   await page.evaluate(() => window.__clockAppTest.clear());
 
+  await page.getByTestId("tab-settings").click();
+  await page.getByTestId("theme-card-interstellar").click();
+  await page.waitForFunction(() => document.documentElement.dataset.theme === "interstellar");
+  await page.getByTestId("brand-home").click();
+  await page.waitForFunction(() => document.querySelector("#clock").classList.contains("active"));
+  const firstQuote = await page.getByTestId("quote-block").textContent();
+  await page.getByTestId("quote-block").click();
+  const secondQuote = await page.getByTestId("quote-block").textContent();
+  assert.notEqual(firstQuote, secondQuote, "Theme quote did not cycle on click");
+
   await page.getByTestId("tab-alarms").click();
   await page.getByTestId("unlock-audio").click();
   await page.waitForFunction(() => document.querySelector("[data-testid='audio-status']").textContent.includes("Ready"));

@@ -1,0 +1,13 @@
+{
+  "name": "qwen-clock-app",
+  "version": "1.0.0",
+  "description": "A responsive digital clock with alarms, countdown timer, and Web Audio alerts.",
+  "type": "module",
+  "scripts": {
+    "serve": "python3 -m http.server 4173",
+    "test:e2e": "node scripts/e2e.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}

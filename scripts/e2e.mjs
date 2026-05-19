@@ -58,6 +58,9 @@ try {
   await page.getByTestId("stop-ring").click();
 
   await page.getByTestId("tab-timer").click();
+  await page.getByTestId("brand-home").click();
+  await page.waitForFunction(() => document.querySelector("#clock").classList.contains("active"));
+  await page.getByTestId("tab-timer").click();
   await page.getByTestId("start-3s-timer").click();
   await page.waitForFunction(
     () => window.__clockAppTest.soundEvents.some((event) => event.type === "timer" && event.audioContextState === "running"),

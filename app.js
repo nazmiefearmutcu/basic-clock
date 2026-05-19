@@ -2,6 +2,7 @@ const STORAGE_KEY = "basic-clock-en-v1";
 
 const el = {
   html: document.documentElement,
+  brandHome: document.getElementById("brandHome"),
   tabs: [...document.querySelectorAll("[data-tab-target]")],
   pages: [...document.querySelectorAll(".page")],
   dateLabel: document.getElementById("dateLabel"),
@@ -533,6 +534,11 @@ function tick() {
 }
 
 function bindEvents() {
+  el.brandHome.addEventListener("click", (event) => {
+    event.preventDefault();
+    switchPage("clock");
+  });
+
   el.tabs.forEach((tab) => tab.addEventListener("click", () => switchPage(tab.dataset.tabTarget)));
 
   window.addEventListener("pointerdown", () => void ensureAudio(), { once: true });

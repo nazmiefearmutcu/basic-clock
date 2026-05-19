@@ -686,7 +686,7 @@ updateClock();
 bindEvents();
 window.setInterval(tick, 250);
 
-if ("serviceWorker" in navigator) {
+if ("serviceWorker" in navigator && ["http:", "https:"].includes(window.location.protocol)) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });

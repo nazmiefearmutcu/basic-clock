@@ -24,6 +24,26 @@ https://nazmiefearmutcu.github.io/basic-clock/
 
 On supported desktop and mobile browsers, use the browser's install option to add Basic Clock as an app shortcut.
 
+## Native Apps
+
+The repository includes an Electron desktop shell that packages the same Basic Clock web app as a native desktop application.
+
+Run the native app locally:
+
+```bash
+npm run desktop:run
+```
+
+Build desktop packages:
+
+```bash
+npm run desktop:build:mac
+npm run desktop:build:win
+npm run desktop:build:linux
+```
+
+Each build writes installers or archives to `dist-native/`. The GitHub Actions workflow builds macOS, Windows, and Linux artifacts on their matching runners.
+
 ## Run
 
 ```bash

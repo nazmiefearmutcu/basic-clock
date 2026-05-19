@@ -3,11 +3,71 @@
   "version": "1.0.0",
   "description": "A responsive digital clock with alarms, countdown timer, and Web Audio alerts.",
   "type": "module",
+  "main": "desktop/main.cjs",
+  "author": "Nazmi Efe Armutcu",
+  "homepage": "https://nazmiefearmutcu.github.io/basic-clock/",
   "scripts": {
     "serve": "python3 -m http.server 4173",
-    "test:e2e": "node scripts/e2e.mjs"
+    "test:e2e": "node scripts/e2e.mjs",
+    "desktop:run": "electron .",
+    "desktop:build": "electron-builder",
+    "desktop:build:dir": "electron-builder --dir",
+    "desktop:build:mac": "electron-builder --mac",
+    "desktop:build:win": "electron-builder --win",
+    "desktop:build:linux": "electron-builder --linux"
   },
   "devDependencies": {
-    "@playwright/test": "^1.56.1"
+    "@playwright/test": "^1.56.1",
+    "electron": "^42.1.0",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "com.nazmiefearmutcu.basic-clock",
+    "productName": "Basic Clock",
+    "asar": true,
+    "directories": {
+      "output": "dist-native"
+    },
+    "files": [
+      "app.js",
+      "desktop/**/*",
+      "icons/**/*",
+      "index.html",
+      "manifest.webmanifest",
+      "package.json",
+      "styles.css",
+      "sw.js"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "icons/basic-clock.icns",
+      "identity": null,
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "icons/basic-clock.ico",
+      "target": [
+        "nsis",
+        "portable",
+        "zip"
+      ]
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": false
+    },
+    "linux": {
+      "category": "Utility",
+      "icon": "icons",
+      "target": [
+        "AppImage",
+        "deb",
+        "tar.gz"
+      ]
+    }
   }
 }

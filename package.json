@@ -1,5 +1,5 @@
 {
-  "name": "time-console",
+  "name": "basic-clock",
   "version": "1.0.0",
   "description": "A responsive digital clock with alarms, countdown timer, and Web Audio alerts.",
   "type": "module",

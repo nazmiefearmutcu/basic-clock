@@ -1,4 +1,4 @@
-const STORAGE_KEY = "time-console-en-v1";
+const STORAGE_KEY = "basic-clock-en-v1";
 
 const el = {
   html: document.documentElement,

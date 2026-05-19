@@ -1,4 +1,4 @@
-# Time Console
+# Basic Clock
 
 Professional responsive digital clock, alarm, and countdown timer app with in-browser Web Audio alerts.
 
@@ -32,4 +32,4 @@ npm install
 npm run test:e2e
 ```
 
-The automated test creates one alarm and one timer, verifies that both trigger Web Audio sound events, and writes a screenshot to `test-results/time-console-e2e.png`.
+The automated test creates one alarm and one timer, verifies that both trigger Web Audio sound events, and writes a screenshot to `test-results/basic-clock-e2e.png`.

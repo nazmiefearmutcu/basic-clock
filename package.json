@@ -4,17 +4,20 @@
   "description": "A responsive digital clock with alarms, countdown timer, and Web Audio alerts.",
   "type": "module",
   "main": "desktop/main.cjs",
-  "author": "Nazmi Efe Armutcu",
+  "author": {
+    "name": "Nazmi Efe Armutcu",
+    "email": "nazmiefearmutcu@users.noreply.github.com"
+  },
   "homepage": "https://nazmiefearmutcu.github.io/basic-clock/",
   "scripts": {
     "serve": "python3 -m http.server 4173",
     "test:e2e": "node scripts/e2e.mjs",
     "desktop:run": "electron .",
-    "desktop:build": "electron-builder",
-    "desktop:build:dir": "electron-builder --dir",
-    "desktop:build:mac": "electron-builder --mac",
-    "desktop:build:win": "electron-builder --win",
-    "desktop:build:linux": "electron-builder --linux"
+    "desktop:build": "electron-builder --publish never",
+    "desktop:build:dir": "electron-builder --dir --publish never",
+    "desktop:build:mac": "electron-builder --mac --publish never",
+    "desktop:build:win": "electron-builder --win --publish never",
+    "desktop:build:linux": "electron-builder --linux --publish never"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",

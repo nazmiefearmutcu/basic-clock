@@ -1,4 +1,4 @@
-const STORAGE_KEY = "qwen-clock-app-v1";
+const STORAGE_KEY = "time-console-v1";
 
 const el = {
   html: document.documentElement,

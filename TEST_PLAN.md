@@ -18,7 +18,7 @@
 5. Open the Timer page and start "3 sn test sayacı".
 6. Wait until the timer popup opens and confirm the timer sound event is emitted.
 7. Confirm no page errors are thrown during the flow.
-8. Capture a screenshot at `test-results/qwen-clock-e2e.png`.
+8. Capture a screenshot at `test-results/time-console-e2e.png`.
 
 ## Manual Audio Notes
 

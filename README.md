@@ -1,6 +1,6 @@
-# Qwen Saat
+# Zaman Terminali
 
-Responsive digital clock, alarm, and countdown timer app generated from the Atlas/Qwen prompt flow and hardened locally.
+Professional responsive digital clock, alarm, and countdown timer app with in-browser Web Audio alerts.
 
 ## Features
 
@@ -32,4 +32,4 @@ npm install
 npm run test:e2e
 ```
 
-The automated test creates one alarm and one timer, verifies that both trigger Web Audio sound events, and writes a screenshot to `test-results/qwen-clock-e2e.png`.
+The automated test creates one alarm and one timer, verifies that both trigger Web Audio sound events, and writes a screenshot to `test-results/time-console-e2e.png`.

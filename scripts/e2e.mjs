@@ -46,7 +46,7 @@ try {
 
   await page.getByTestId("tab-alarms").click();
   await page.getByTestId("unlock-audio").click();
-  await page.waitForFunction(() => document.querySelector("[data-testid='audio-status']").textContent.includes("Hazır"));
+  await page.waitForFunction(() => document.querySelector("[data-testid='audio-status']").textContent.includes("Ready"));
 
   await page.getByTestId("quick-test-alarm").click();
   await page.waitForFunction(

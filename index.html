@@ -1,23 +1,24 @@
 <!doctype html>
-<html lang="tr" data-theme="matrix">
+<html lang="en" data-theme="matrix">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zaman Terminali</title>
+    <title>Time Console</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2308141f'/%3E%3Cpath d='M32 12v22l14 8' stroke='%2339ff88' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='32' r='22' stroke='%23d6f7ff' stroke-width='4' fill='none'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Yerel zaman terminali</p>
-          <h1>Zaman Terminali</h1>
+          <p class="eyebrow">Local time console</p>
+          <h1>Time Console</h1>
         </div>
-        <nav class="tabs" aria-label="Ana sayfalar">
-          <button class="tab active" data-tab-target="clock" data-testid="tab-clock">Saat</button>
-          <button class="tab" data-tab-target="alarms" data-testid="tab-alarms">Alarmlar</button>
-          <button class="tab" data-tab-target="timer" data-testid="tab-timer">Sayaç</button>
-          <button class="tab" data-tab-target="settings" data-testid="tab-settings">Ayarlar</button>
+        <nav class="tabs" aria-label="Main navigation">
+          <button class="tab active" data-tab-target="clock" data-testid="tab-clock">Clock</button>
+          <button class="tab" data-tab-target="alarms" data-testid="tab-alarms">Alarms</button>
+          <button class="tab" data-tab-target="timer" data-testid="tab-timer">Timer</button>
+          <button class="tab" data-tab-target="settings" data-testid="tab-settings">Settings</button>
         </nav>
       </header>
 
@@ -28,16 +29,16 @@
               <span id="dateLabel">--</span>
               <span id="timezoneLabel">--</span>
             </div>
-            <h2 id="clock-heading" class="sr-only">Dijital saat</h2>
+            <h2 id="clock-heading" class="sr-only">Digital clock</h2>
             <div id="digitalClock" class="digital-clock" data-testid="digital-clock">--:--:--</div>
             <div class="clock-meta">
               <div>
-                <span class="meta-label">Sıradaki alarm</span>
-                <strong id="nextAlarmLabel" data-testid="next-alarm">Alarm yok</strong>
+                <span class="meta-label">Next alarm</span>
+                <strong id="nextAlarmLabel" data-testid="next-alarm">No alarms</strong>
               </div>
               <div>
-                <span class="meta-label">Ses durumu</span>
-                <strong id="audioStatus" data-testid="audio-status">Kilitli</strong>
+                <span class="meta-label">Audio status</span>
+                <strong id="audioStatus" data-testid="audio-status">Locked</strong>
               </div>
             </div>
           </div>
@@ -46,37 +47,37 @@
         <section id="alarms" class="page" aria-labelledby="alarms-heading">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Günlük ve tek seferlik</p>
-              <h2 id="alarms-heading">Alarmlar</h2>
+              <p class="eyebrow">Daily and one-time</p>
+              <h2 id="alarms-heading">Alarms</h2>
             </div>
-            <button class="primary" id="unlockAudio" data-testid="unlock-audio">Sesi hazırla</button>
+            <button class="primary" id="unlockAudio" data-testid="unlock-audio">Enable audio</button>
           </div>
 
           <form id="alarmForm" class="form-grid">
             <label>
-              Saat
+              Time
               <input id="alarmTime" type="time" required />
             </label>
             <label>
-              Etiket
+              Label
               <input id="alarmLabel" type="text" maxlength="40" value="Alarm" />
             </label>
             <label>
-              Ses
+              Sound
               <select id="alarmSound">
-                <option value="bell">Güçlü zil</option>
-                <option value="pulse">Yumuşak pulse</option>
-                <option value="triple">Üçlü sinyal</option>
+                <option value="bell">Strong bell</option>
+                <option value="pulse">Soft pulse</option>
+                <option value="triple">Triple chime</option>
               </select>
             </label>
-            <button class="primary" type="submit" data-testid="add-alarm">Alarm ekle</button>
+            <button class="primary" type="submit" data-testid="add-alarm">Add alarm</button>
           </form>
 
-          <div class="quick-row" aria-label="Hızlı alarm seçenekleri">
-            <button id="quickOne" data-testid="quick-one">+1 dk alarm</button>
-            <button id="quickTen" data-testid="quick-ten">+10 dk alarm</button>
-            <button id="quickTestAlarm" data-testid="quick-test-alarm">Test alarmı +5 sn</button>
-            <button id="testAlarmSound" data-testid="test-alarm-sound">Alarm sesini dene</button>
+          <div class="quick-row" aria-label="Quick alarm actions">
+            <button id="quickOne" data-testid="quick-one">+1 min alarm</button>
+            <button id="quickTen" data-testid="quick-ten">+10 min alarm</button>
+            <button id="quickTestAlarm" data-testid="quick-test-alarm">Test alarm +5 sec</button>
+            <button id="testAlarmSound" data-testid="test-alarm-sound">Try alarm sound</button>
           </div>
 
           <div id="alarmList" class="list" data-testid="alarm-list"></div>
@@ -85,29 +86,29 @@
         <section id="timer" class="page" aria-labelledby="timer-heading">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Geri sayım</p>
-              <h2 id="timer-heading">Sayaç</h2>
+              <p class="eyebrow">Countdown</p>
+              <h2 id="timer-heading">Timer</h2>
             </div>
-            <button id="testTimerSound" data-testid="test-timer-sound">Sayaç sesini dene</button>
+            <button id="testTimerSound" data-testid="test-timer-sound">Try timer sound</button>
           </div>
 
           <div class="timer-card">
             <div id="timerDisplay" class="timer-display" data-testid="timer-display">00:00</div>
             <div class="timer-inputs">
               <label>
-                Dakika
+                Minutes
                 <input id="timerMinutes" type="number" min="0" max="999" value="1" />
               </label>
               <label>
-                Saniye
+                Seconds
                 <input id="timerSeconds" type="number" min="0" max="59" value="0" />
               </label>
             </div>
             <div class="timer-actions">
-              <button class="primary" id="startTimer" data-testid="start-timer">Başlat</button>
-              <button id="pauseTimer" data-testid="pause-timer">Duraklat</button>
-              <button id="resetTimer" data-testid="reset-timer">Sıfırla</button>
-              <button id="startThreeSecondTimer" data-testid="start-3s-timer">3 sn test sayacı</button>
+              <button class="primary" id="startTimer" data-testid="start-timer">Start</button>
+              <button id="pauseTimer" data-testid="pause-timer">Pause</button>
+              <button id="resetTimer" data-testid="reset-timer">Reset</button>
+              <button id="startThreeSecondTimer" data-testid="start-3s-timer">3 sec test timer</button>
             </div>
           </div>
         </section>
@@ -115,14 +116,14 @@
         <section id="settings" class="page" aria-labelledby="settings-heading">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Görünüm ve ses</p>
-              <h2 id="settings-heading">Ayarlar</h2>
+              <p class="eyebrow">Appearance and sound</p>
+              <h2 id="settings-heading">Settings</h2>
             </div>
           </div>
 
           <div class="settings-grid">
             <label>
-              Tema
+              Theme
               <select id="themeSelect" data-testid="theme-select">
                 <option value="matrix">Matrix</option>
                 <option value="midnight">Midnight</option>
@@ -131,36 +132,36 @@
               </select>
             </label>
             <label>
-              Alarm sesi
+              Alarm sound
               <select id="defaultAlarmSound">
-                <option value="bell">Güçlü zil</option>
-                <option value="pulse">Yumuşak pulse</option>
-                <option value="triple">Üçlü sinyal</option>
+                <option value="bell">Strong bell</option>
+                <option value="pulse">Soft pulse</option>
+                <option value="triple">Triple chime</option>
               </select>
             </label>
             <label>
-              Sayaç sesi
+              Timer sound
               <select id="defaultTimerSound">
-                <option value="triple">Üçlü sinyal</option>
-                <option value="bell">Güçlü zil</option>
-                <option value="pulse">Yumuşak pulse</option>
+                <option value="triple">Triple chime</option>
+                <option value="bell">Strong bell</option>
+                <option value="pulse">Soft pulse</option>
               </select>
             </label>
             <label>
-              Ses seviyesi
+              Volume
               <input id="volumeRange" type="range" min="0" max="1" step="0.05" />
             </label>
             <label class="check-line">
               <input id="mutedToggle" type="checkbox" />
-              Sesi kapat
+              Mute audio
             </label>
             <label class="check-line">
               <input id="hourToggle" type="checkbox" />
-              12 saat formatı
+              12-hour clock
             </label>
             <label class="check-line">
               <input id="secondsToggle" type="checkbox" />
-              Saniyeleri göster
+              Show seconds
             </label>
           </div>
         </section>
@@ -170,11 +171,11 @@
     <dialog id="ringDialog" class="ring-dialog" data-testid="ring-dialog">
       <div class="ring-content">
         <p id="ringKind" class="eyebrow">Alarm</p>
-        <h2 id="ringTitle">Zaman doldu</h2>
-        <p id="ringDetail">Ses çalıyor.</p>
+        <h2 id="ringTitle">Time is up</h2>
+        <p id="ringDetail">Sound is playing.</p>
         <div class="ring-actions">
-          <button class="primary" id="stopRing" data-testid="stop-ring">Sustur</button>
-          <button id="snoozeRing" data-testid="snooze-ring">5 dk ertele</button>
+          <button class="primary" id="stopRing" data-testid="stop-ring">Stop</button>
+          <button id="snoozeRing" data-testid="snooze-ring">Snooze 5 min</button>
         </div>
       </div>
     </dialog>

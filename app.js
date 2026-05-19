@@ -1,4 +1,4 @@
-const STORAGE_KEY = "time-console-v1";
+const STORAGE_KEY = "time-console-en-v1";
 
 const el = {
   html: document.documentElement,
@@ -149,8 +149,8 @@ function updateMasterGain() {
 }
 
 function updateAudioStatus() {
-  const base = audio.unlocked ? "Hazır" : "Kilitli";
-  el.audioStatus.textContent = state.settings.muted ? `${base}, sessiz` : base;
+  const base = audio.unlocked ? "Ready" : "Locked";
+  el.audioStatus.textContent = state.settings.muted ? `${base}, muted` : base;
 }
 
 function soundPattern(soundName) {
@@ -239,7 +239,7 @@ function switchPage(target) {
 }
 
 function formatClock(now) {
-  return new Intl.DateTimeFormat("tr-TR", {
+  return new Intl.DateTimeFormat("en-US", {
     hour: "2-digit",
     minute: "2-digit",
     second: state.settings.showSeconds ? "2-digit" : undefined,
@@ -249,7 +249,7 @@ function formatClock(now) {
 
 function updateClock(now = new Date()) {
   el.digitalClock.textContent = formatClock(now);
-  el.dateLabel.textContent = new Intl.DateTimeFormat("tr-TR", {
+  el.dateLabel.textContent = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     day: "2-digit",
     month: "long",
@@ -284,7 +284,7 @@ function addDailyAlarm(time, label, sound) {
   updateClock();
 }
 
-function addOneTimeAlarm(secondsFromNow, label = "Tek seferlik alarm", sound = state.settings.defaultAlarmSound) {
+function addOneTimeAlarm(secondsFromNow, label = "One-time alarm", sound = state.settings.defaultAlarmSound) {
   const dueAt = new Date(Date.now() + secondsFromNow * 1000);
   const alarm = {
     id: uid(),
@@ -299,7 +299,7 @@ function addOneTimeAlarm(secondsFromNow, label = "Tek seferlik alarm", sound = s
   saveState();
   renderAlarms();
   updateClock();
-  showToast(`${label} ${dueAt.toLocaleTimeString("tr-TR")} için eklendi.`);
+  showToast(`${label} scheduled for ${dueAt.toLocaleTimeString("en-US")}.`);
   return alarm;
 }
 
@@ -325,7 +325,7 @@ function renderAlarms() {
   if (state.alarms.length === 0) {
     const empty = document.createElement("div");
     empty.className = "list-item";
-    empty.textContent = "Henüz alarm yok.";
+    empty.textContent = "No alarms yet.";
     el.alarmList.append(empty);
     return;
   }
@@ -343,23 +343,23 @@ function renderAlarms() {
     const subtitle = document.createElement("p");
     subtitle.className = "list-subtitle";
     subtitle.textContent = alarm.type === "daily"
-      ? `Her gün ${alarm.time} - ${alarm.sound}`
-      : `${new Date(alarm.at).toLocaleString("tr-TR")} - ${alarm.sound}`;
+      ? `Daily at ${alarm.time} - ${alarm.sound}`
+      : `${new Date(alarm.at).toLocaleString("en-US")} - ${alarm.sound}`;
     text.append(title, subtitle);
 
     const status = document.createElement("span");
     status.className = "pill";
-    status.textContent = alarm.enabled ? "Açık" : "Kapalı";
+    status.textContent = alarm.enabled ? "On" : "Off";
 
     const actions = document.createElement("div");
     actions.className = "quick-row";
     const toggle = document.createElement("button");
     toggle.type = "button";
-    toggle.textContent = alarm.enabled ? "Kapat" : "Aç";
+    toggle.textContent = alarm.enabled ? "Disable" : "Enable";
     toggle.addEventListener("click", () => toggleAlarm(alarm.id));
     const remove = document.createElement("button");
     remove.type = "button";
-    remove.textContent = "Sil";
+    remove.textContent = "Delete";
     remove.addEventListener("click", () => removeAlarm(alarm.id));
     actions.append(toggle, remove);
 
@@ -380,10 +380,10 @@ function nextDateForAlarm(alarm, now = new Date()) {
 
 function nextAlarmText(now = new Date()) {
   const active = state.alarms.filter((alarm) => alarm.enabled);
-  if (active.length === 0) return "Alarm yok";
+  if (active.length === 0) return "No alarms";
   const next = active.map((alarm) => ({ alarm, date: nextDateForAlarm(alarm, now) })).sort((a, b) => a.date - b.date)[0];
   const seconds = Math.max(0, Math.round((next.date - now) / 1000));
-  return `${next.alarm.label} - ${formatDuration(seconds)} sonra`;
+  return `${next.alarm.label} - in ${formatDuration(seconds)}`;
 }
 
 function alarmDueKey(now, alarm) {
@@ -415,7 +415,7 @@ function fireAlarm(alarm) {
   showRing({
     kind: "alarm",
     title: alarm.label,
-    detail: "Alarm zamanı geldi. Ses tekrarlı çalıyor.",
+    detail: "Your alarm is ringing. The sound repeats until stopped.",
     sound: alarm.sound
   });
 }
@@ -483,8 +483,8 @@ function updateTimerRemaining() {
     saveState();
     showRing({
       kind: "timer",
-      title: "Sayaç bitti",
-      detail: "Geri sayım tamamlandı. Sayaç sesi çalıyor.",
+      title: "Timer complete",
+      detail: "The countdown is complete. Timer audio is playing.",
       sound: state.settings.defaultTimerSound
     });
   }
@@ -499,7 +499,7 @@ function renderTimer() {
 
 function showRing({ kind, title, detail, sound }) {
   currentRing = { kind, title, detail, sound };
-  el.ringKind.textContent = kind === "alarm" ? "Alarm" : "Sayaç";
+  el.ringKind.textContent = kind === "alarm" ? "Alarm" : "Timer";
   el.ringTitle.textContent = title;
   el.ringDetail.textContent = detail;
   el.snoozeRing.hidden = kind !== "alarm";
@@ -521,7 +521,7 @@ function stopRing() {
 
 function snoozeCurrentRing() {
   if (!currentRing || currentRing.kind !== "alarm") return;
-  addOneTimeAlarm(300, `Erteleme: ${currentRing.title}`, currentRing.sound);
+  addOneTimeAlarm(300, `Snooze: ${currentRing.title}`, currentRing.sound);
   stopRing();
 }
 
@@ -540,34 +540,34 @@ function bindEvents() {
 
   el.unlockAudio.addEventListener("click", async () => {
     const ok = await ensureAudio();
-    showToast(ok ? "Ses motoru hazır." : "Tarayıcı ses motoru başlatılamadı.");
+    showToast(ok ? "Audio is ready." : "The browser could not start audio.");
   });
 
   el.alarmForm.addEventListener("submit", (event) => {
     event.preventDefault();
     void ensureAudio();
     addDailyAlarm(el.alarmTime.value, el.alarmLabel.value.trim(), el.alarmSound.value);
-    showToast("Alarm eklendi.");
+    showToast("Alarm added.");
   });
 
   el.quickOne.addEventListener("click", () => {
     void ensureAudio();
-    addOneTimeAlarm(60, "+1 dk alarm");
+    addOneTimeAlarm(60, "+1 min alarm");
   });
   el.quickTen.addEventListener("click", () => {
     void ensureAudio();
-    addOneTimeAlarm(600, "+10 dk alarm");
+    addOneTimeAlarm(600, "+10 min alarm");
   });
   el.quickTestAlarm.addEventListener("click", () => {
     void ensureAudio();
-    addOneTimeAlarm(5, "Test alarmı");
+    addOneTimeAlarm(5, "Test alarm");
   });
   el.testAlarmSound.addEventListener("click", () => {
     void ensureAudio();
     showRing({
       kind: "alarm",
-      title: "Alarm ses testi",
-      detail: "Alarm sesi manuel test için çalıyor.",
+      title: "Alarm sound test",
+      detail: "Alarm audio is playing for a manual test.",
       sound: el.alarmSound.value
     });
   });
@@ -576,8 +576,8 @@ function bindEvents() {
     void ensureAudio();
     showRing({
       kind: "timer",
-      title: "Sayaç ses testi",
-      detail: "Sayaç sesi manuel test için çalıyor.",
+      title: "Timer sound test",
+      detail: "Timer audio is playing for a manual test.",
       sound: state.settings.defaultTimerSound
     });
   });
@@ -664,7 +664,7 @@ window.__clockAppTest = {
     updateClock();
   },
   createTestAlarm(seconds = 5) {
-    return addOneTimeAlarm(seconds, "Otomatik test alarmı");
+    return addOneTimeAlarm(seconds, "Automated test alarm");
   },
   startTestTimer(seconds = 3) {
     setTimerDuration(seconds);

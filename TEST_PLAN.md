@@ -12,17 +12,17 @@
 ## Acceptance Tests Run Locally
 
 1. Open the app and confirm the main clock fills the viewport horizontally and updates every second.
-2. Prepare audio with the "Sesi hazırla" button and confirm status changes to "Hazır".
-3. Add the built-in "Test alarmı +5 sn" alarm.
-4. Wait until the alarm popup opens, confirm the alarm sound event is emitted, then click "Sustur".
-5. Open the Timer page and start "3 sn test sayacı".
+2. Enable audio with the "Enable audio" button and confirm status changes to "Ready".
+3. Add the built-in "Test alarm +5 sec" alarm.
+4. Wait until the alarm popup opens, confirm the alarm sound event is emitted, then click "Stop".
+5. Open the Timer page and start "3 sec test timer".
 6. Wait until the timer popup opens and confirm the timer sound event is emitted.
 7. Confirm no page errors are thrown during the flow.
 8. Capture a screenshot at `test-results/time-console-e2e.png`.
 
 ## Manual Audio Notes
 
-Browsers require a user gesture before Web Audio can play. The app unlocks the AudioContext on the first pointer or keyboard event and exposes a visible "Sesi hazırla" button. The alarm uses a repeated 880/660/990 Hz bell pattern. The timer uses a 523/659/784 Hz triple signal. If Web Audio is unavailable, the app records the event, shows the popup, and attempts vibration as a fallback.
+Browsers require a user gesture before Web Audio can play. The app unlocks the AudioContext on the first pointer or keyboard event and exposes a visible "Enable audio" button. The alarm uses a repeated 880/660/990 Hz bell pattern. The timer uses a 523/659/784 Hz triple signal. If Web Audio is unavailable, the app records the event, shows the popup, and attempts vibration as a fallback.
 
 ## Command
 

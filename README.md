@@ -1,4 +1,4 @@
-# Zaman Terminali
+# Time Console
 
 Professional responsive digital clock, alarm, and countdown timer app with in-browser Web Audio alerts.
 

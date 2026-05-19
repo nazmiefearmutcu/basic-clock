@@ -11,7 +11,18 @@ Professional responsive digital clock, alarm, and countdown timer app with in-br
 - Countdown timer with a 3 second test flow.
 - Web Audio alarm and timer sounds generated in-app with volume, mute, and sound selection.
 - localStorage persistence for alarms and settings.
+- Installable app shortcut support through a web app manifest and service worker.
 - Static GitHub Pages-ready deployment: no build step required.
+
+## Open
+
+Use the live app:
+
+```text
+https://nazmiefearmutcu.github.io/basic-clock/
+```
+
+On supported desktop and mobile browsers, use the browser's install option to add Basic Clock as an app shortcut.
 
 ## Run
 

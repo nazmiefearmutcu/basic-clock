@@ -679,3 +679,9 @@ renderTimer();
 updateClock();
 bindEvents();
 window.setInterval(tick, 250);
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}

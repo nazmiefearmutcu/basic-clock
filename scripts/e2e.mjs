@@ -46,6 +46,14 @@ try {
 
   await page.getByTestId("tab-settings").click();
   assert.equal(await page.locator("[data-theme-pick]").count(), 6, "Expected six uploaded theme cards");
+  await page.getByTestId("topbar-autohide-toggle").check();
+  await page.waitForFunction(() => document.documentElement.dataset.topbar === "auto-hide");
+  await page.mouse.move(720, 420);
+  await page.waitForFunction(() => document.querySelector(".topbar").getBoundingClientRect().height <= 14);
+  await page.mouse.move(720, 5);
+  await page.waitForFunction(() => document.querySelector(".topbar").getBoundingClientRect().height > 60);
+  await page.getByTestId("topbar-autohide-toggle").uncheck();
+  await page.waitForFunction(() => document.documentElement.dataset.topbar === "fixed");
   for (const theme of ["matrix", "bladerunner", "alien", "pinkie", "rainbow", "interstellar"]) {
     await page.getByTestId("tab-settings").click();
     await page.locator(`[data-theme-pick="${theme}"]`).click();

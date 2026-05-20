@@ -131,6 +131,7 @@ const el = {
   dateFormat: document.getElementById("dateFormat"),
   fxToggle: document.getElementById("fxToggle"),
   scanlinesToggle: document.getElementById("scanlinesToggle"),
+  topbarAutoHideToggle: document.getElementById("topbarAutoHideToggle"),
   resetSettings: document.getElementById("resetSettings"),
 
   ringDialog: document.getElementById("ringDialog"),
@@ -164,7 +165,8 @@ const defaults = {
     customMotto: "",
     dateFormat: "long",
     fx: true,
-    scanlines: true
+    scanlines: true,
+    topbarAutoHide: false
   },
   alarms: [],
   timer: {
@@ -212,6 +214,7 @@ function applySettings() {
   el.html.dataset.scanlines = s.scanlines ? "on" : "off";
   el.html.dataset.showSeconds = s.showSeconds ? "on" : "off";
   el.html.dataset.blink = s.blink ? "on" : "off";
+  el.html.dataset.topbar = s.topbarAutoHide ? "auto-hide" : "fixed";
 
   // Accent override
   const accent = s.accent || THEME_DEFAULT_ACCENTS[s.theme];
@@ -234,6 +237,7 @@ function applySettings() {
   el.blinkToggle.checked = s.blink;
   el.fxToggle.checked = s.fx;
   el.scanlinesToggle.checked = s.scanlines;
+  el.topbarAutoHideToggle.checked = s.topbarAutoHide;
   el.dateFormat.value = s.dateFormat;
   el.displayName.value = s.displayName;
   el.greetingStyle.value = s.greetingStyle;
@@ -742,6 +746,7 @@ function bindEvents() {
   el.dateFormat.addEventListener("change", () => { state.settings.dateFormat = el.dateFormat.value; saveState(); updateClock(); });
   el.fxToggle.addEventListener("change", () => { state.settings.fx = el.fxToggle.checked; saveState(); applySettings(); });
   el.scanlinesToggle.addEventListener("change", () => { state.settings.scanlines = el.scanlinesToggle.checked; saveState(); applySettings(); });
+  el.topbarAutoHideToggle.addEventListener("change", () => { state.settings.topbarAutoHide = el.topbarAutoHideToggle.checked; saveState(); applySettings(); });
 
   el.resetSettings.addEventListener("click", () => {
     if (!confirm("Reset all settings (alarms and timer kept)?")) return;

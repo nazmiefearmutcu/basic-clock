@@ -46,14 +46,23 @@ try {
 
   await page.getByTestId("tab-settings").click();
   assert.equal(await page.locator("[data-theme-pick]").count(), 6, "Expected six uploaded theme cards");
-  await page.getByTestId("theme-card-rainbow").click();
-  await page.waitForFunction(() => document.documentElement.dataset.theme === "rainbow");
-  await page.evaluate(() => { document.documentElement.dataset.layout = "minimal"; });
-  await page.waitForFunction(() => document.fonts?.ready);
-  const rainbowOverflow = await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth));
-  assert.equal(rainbowOverflow, 0, "Rainbow minimal clock should fit without horizontal overflow");
+  for (const theme of ["matrix", "bladerunner", "alien", "pinkie", "rainbow", "interstellar"]) {
+    await page.getByTestId("tab-settings").click();
+    await page.locator(`[data-theme-pick="${theme}"]`).click();
+    await page.locator('[data-seg="layout"] [data-seg-val="minimal"]').click();
+    await page.waitForFunction((nextTheme) => document.documentElement.dataset.theme === nextTheme, theme);
+    await page.waitForFunction(() => document.documentElement.dataset.layout === "minimal");
+    await page.getByTestId("brand-home").click();
+    await page.waitForFunction(() => document.querySelector("#clock").classList.contains("active"));
+    await page.waitForFunction(() => document.fonts?.ready);
+    const themeOverflow = await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth));
+    assert.equal(themeOverflow, 0, `${theme} minimal clock should fit without horizontal overflow`);
+  }
+  await page.getByTestId("tab-settings").click();
   await page.getByTestId("theme-card-interstellar").click();
+  await page.locator('[data-seg="layout"] [data-seg-val="split"]').click();
   await page.waitForFunction(() => document.documentElement.dataset.theme === "interstellar");
+  await page.waitForFunction(() => document.documentElement.dataset.layout === "split");
   await page.getByTestId("brand-home").click();
   await page.waitForFunction(() => document.querySelector("#clock").classList.contains("active"));
   const firstQuote = await page.locator("#greetingName").textContent();

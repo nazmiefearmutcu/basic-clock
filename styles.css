@@ -831,9 +831,9 @@ input[type="checkbox"] {
 [data-layout="minimal"] .clock-foot { display: none; }
 [data-layout="minimal"] .digital-clock { font-size: clamp(6rem, 24vw, 24rem); }
 
-/* Rainbow uses a very wide display face and hard offset shadows, so it needs
-   its own fitted clock size after the layout rules have run. */
-[data-theme="rainbow"] .digital-clock {
+/* Theme display faces and shadows have different visual widths. Keep the main
+   clock fitted after layout-specific sizing has run. */
+[data-theme] .digital-clock {
   font-size: clamp(3rem, 17vw, 16rem);
 }
 

@@ -33,6 +33,15 @@ const THEME_DEFAULT_ACCENTS = {
   interstellar: "#e8b76f"
 };
 
+const THEME_CLOCK_COLORS = {
+  matrix: ["#39ff88", "#b6ffd0", "#7af0ff"],
+  bladerunner: ["#ffd9b0", "#ff7a1a", "#2bd4e4"],
+  alien: ["#ffd07a", "#ffb000", "#ff3b3b"],
+  pinkie: ["#ff8fd5", "#ff4ea8", "#c81585"],
+  rainbow: ["#ff3b3b", "#ffd83a", "#a455ff"],
+  interstellar: ["#ffffff", "#f7e6c3", "#e8b76f"]
+};
+
 /* Iconic quotes per theme — rotate every ~18s, click to advance. */
 const THEME_QUOTES = {
   matrix: [
@@ -174,7 +183,7 @@ const defaults = {
     scanlines: true,
     topbarAutoHide: false,
     customClockColors: false,
-    clockColors: ["#ffffff", "#e8b76f", "#8ec5ff"]
+    clockColors: THEME_CLOCK_COLORS.matrix
   },
   alarms: [],
   timer: {
@@ -195,7 +204,9 @@ function loadState() {
     const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (!parsed || typeof parsed !== "object") return structuredClone(defaults);
     const settings = { ...defaults.settings, ...parsed.settings };
-    settings.clockColors = normalizeClockColors(settings.clockColors);
+    settings.clockColors = settings.customClockColors
+      ? normalizeClockColors(settings.clockColors, settings.theme)
+      : themeClockColors(settings.theme);
     return {
       settings,
       alarms: Array.isArray(parsed.alarms) ? parsed.alarms : [],
@@ -210,9 +221,13 @@ function isHexColor(value) {
   return typeof value === "string" && /^#[0-9a-f]{6}$/i.test(value);
 }
 
-function normalizeClockColors(value) {
+function themeClockColors(theme) {
+  return [...(THEME_CLOCK_COLORS[theme] || THEME_CLOCK_COLORS.matrix)];
+}
+
+function normalizeClockColors(value, theme = "matrix") {
   const source = Array.isArray(value) ? value : [];
-  return defaults.settings.clockColors.map((fallback, index) => {
+  return themeClockColors(theme).map((fallback, index) => {
     const candidate = source[index];
     return isHexColor(candidate) ? candidate.toLowerCase() : fallback;
   });
@@ -237,7 +252,7 @@ function applySettings() {
   el.html.dataset.showSeconds = s.showSeconds ? "on" : "off";
   el.html.dataset.blink = s.blink ? "on" : "off";
   el.html.dataset.topbar = s.topbarAutoHide ? "auto-hide" : "fixed";
-  const clockColors = normalizeClockColors(s.clockColors);
+  const clockColors = s.customClockColors ? normalizeClockColors(s.clockColors, s.theme) : themeClockColors(s.theme);
   state.settings.clockColors = clockColors;
   el.html.dataset.clockColors = s.customClockColors ? "custom" : "theme";
   clockColors.forEach((color, index) => {
@@ -743,9 +758,12 @@ function bindEvents() {
   // Theme cards
   el.themeCards.forEach(card => {
     card.addEventListener("click", () => {
-      if (state.settings.theme !== card.dataset.themePick) {
-        state.settings.theme = card.dataset.themePick;
+      const nextTheme = card.dataset.themePick;
+      if (state.settings.theme !== nextTheme || state.settings.customClockColors) {
+        state.settings.theme = nextTheme;
         state.settings.accent = null; // reset accent to theme default
+        state.settings.customClockColors = false;
+        state.settings.clockColors = themeClockColors(nextTheme);
         saveState();
         applySettings();
       }
@@ -781,13 +799,13 @@ function bindEvents() {
   el.topbarAutoHideToggle.addEventListener("change", () => { state.settings.topbarAutoHide = el.topbarAutoHideToggle.checked; saveState(); applySettings(); });
   el.clockCustomColorToggle.addEventListener("change", () => {
     state.settings.customClockColors = el.clockCustomColorToggle.checked;
-    state.settings.clockColors = normalizeClockColors(state.settings.clockColors);
+    state.settings.clockColors = normalizeClockColors(state.settings.clockColors, state.settings.theme);
     saveState();
     applySettings();
   });
   el.clockColorInputs.forEach((input, index) => {
     input.addEventListener("input", () => {
-      state.settings.clockColors = normalizeClockColors(state.settings.clockColors);
+      state.settings.clockColors = normalizeClockColors(state.settings.clockColors, state.settings.theme);
       state.settings.clockColors[index] = input.value.toLowerCase();
       state.settings.customClockColors = true;
       saveState();

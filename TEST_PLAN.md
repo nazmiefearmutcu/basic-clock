@@ -7,8 +7,11 @@
 - The Such A Good Clock logo returns the user to the Clock home page.
 - The Settings page renders six theme cards: Matrix, 2049, Alien, Pinkie, Rainbow, and Interstellar.
 - Theme changes update the full app shell, clock styling, card selection, and theme-specific quote layer.
+- Selecting a preset theme disables custom clock color override so the clock returns to the preset theme colors.
 - Custom clock colors expose three color controls: top, middle, and bottom.
 - Custom clock colors override the digital clock across every theme while preserving theme backgrounds and layout.
+- Matrix is the default theme and hides the lower info bar.
+- Non-Matrix themes show lower info text without a visible frame, panel fill, or separator effect.
 - The theme quote layer rotates automatically and can be advanced by clicking it.
 - Alarm creation, upcoming-alarm selection, popup behavior, stop, and snooze work.
 - Countdown timer completion opens the global popup.
@@ -22,15 +25,17 @@
 2. Open Settings, choose Interstellar, and confirm the document theme switches.
 3. Enable custom clock colors and assign top, middle, and bottom colors.
 4. Confirm the clock uses the custom gradient and the separators use the middle color.
-5. Click the Such A Good Clock logo and confirm the Clock page becomes active.
-6. Click the quote layer and confirm the quote text changes.
-7. Enable audio with the "Enable audio" button and confirm status changes to "Ready".
-8. Add the built-in "Test alarm +5 sec" alarm.
-9. Wait until the alarm popup opens, confirm the alarm sound event is emitted, then click "Stop".
-10. Open the Timer page and start "3 sec test timer".
-11. Wait until the timer popup opens and confirm the timer sound event is emitted.
-12. Confirm no page errors are thrown during the flow.
-13. Capture a screenshot at `test-results/such-a-good-clock-e2e.png`.
+5. Select a preset theme and confirm custom clock colors turn off automatically.
+6. Confirm Matrix hides the lower info bar and other themes keep the lower info text without a visible frame.
+7. Click the Such A Good Clock logo and confirm the Clock page becomes active.
+8. Click the quote layer and confirm the quote text changes.
+9. Enable audio with the "Enable audio" button and confirm status changes to "Ready".
+10. Add the built-in "Test alarm +5 sec" alarm.
+11. Wait until the alarm popup opens, confirm the alarm sound event is emitted, then click "Stop".
+12. Open the Timer page and start "3 sec test timer".
+13. Wait until the timer popup opens and confirm the timer sound event is emitted.
+14. Confirm no page errors are thrown during the flow.
+15. Capture a screenshot at `test-results/such-a-good-clock-e2e.png`.
 
 ## Visual and Interaction Checks
 

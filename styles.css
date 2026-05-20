@@ -912,18 +912,21 @@ input[type="checkbox"] {
 .clock-foot {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--border);
-  overflow: hidden;
+  gap: 18px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
 }
 .clock-foot-cell {
-  background: var(--panel);
-  padding: 16px 18px;
+  background: transparent;
+  padding: 0;
   display: grid;
   gap: 4px;
 }
+
+[data-theme="matrix"] .clock-foot { display: none; }
 .meta-label {
   display: block;
   color: var(--muted);
@@ -948,10 +951,6 @@ input[type="checkbox"] {
 [data-theme="alien"] .clock-foot-cell strong { color: var(--accent); }
 [data-theme="pinkie"] .clock-foot-cell strong { font-family: var(--font-head); font-weight: 400; font-size: 1.15rem; }
 [data-theme="rainbow"] .clock-foot-cell strong { font-family: var(--font-head); font-weight: 400; }
-
-/* Pinkie: rounded foot cells */
-[data-theme="pinkie"] .clock-foot,
-[data-theme="rainbow"] .clock-foot { border-radius: 20px; }
 
 /* ============================================================
    Section heads / forms

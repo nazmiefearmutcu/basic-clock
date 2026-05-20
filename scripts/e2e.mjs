@@ -44,6 +44,15 @@ try {
   await page.waitForFunction(() => Boolean(window.__clockAppTest));
   await page.evaluate(() => window.__clockAppTest.clear());
 
+  const defaultClock = await page.evaluate(() => ({
+    theme: document.documentElement.dataset.theme,
+    clockColors: document.documentElement.dataset.clockColors,
+    footDisplay: getComputedStyle(document.querySelector(".clock-foot")).display
+  }));
+  assert.equal(defaultClock.theme, "matrix", "Default theme should be Matrix");
+  assert.equal(defaultClock.clockColors, "theme", "Default clock colors should follow the selected theme");
+  assert.equal(defaultClock.footDisplay, "none", "Matrix should hide the lower info bar");
+
   await page.getByTestId("tab-settings").click();
   assert.equal(await page.locator("[data-theme-pick]").count(), 6, "Expected six uploaded theme cards");
   await page.getByTestId("topbar-autohide-toggle").check();
@@ -87,8 +96,34 @@ try {
   assert.match(customClock.separatorColor, /rgb\(51,\s*255,\s*102\)/, "Clock separators did not use the middle custom color");
   assert.equal(customClock.overflow, 0, "Custom clock colors should not create horizontal overflow");
   await page.getByTestId("tab-settings").click();
-  await page.getByTestId("clock-custom-colors-toggle").uncheck();
+  await page.getByTestId("theme-card-rainbow").click();
   await page.waitForFunction(() => document.documentElement.dataset.clockColors === "theme");
+  await page.waitForFunction(() => document.documentElement.dataset.theme === "rainbow");
+  await page.getByTestId("brand-home").click();
+  const themedClock = await page.evaluate(() => {
+    const foot = document.querySelector(".clock-foot");
+    const footCell = document.querySelector(".clock-foot-cell");
+    const footStyle = getComputedStyle(foot);
+    const footCellStyle = getComputedStyle(footCell);
+    const clockStyle = getComputedStyle(document.querySelector("#digitalClock"));
+    return {
+      customToggleChecked: document.querySelector("[data-testid='clock-custom-colors-toggle']").checked,
+      background: clockStyle.backgroundImage,
+      footDisplay: footStyle.display,
+      footBorder: footStyle.borderTopStyle,
+      footBorderWidth: footStyle.borderTopWidth,
+      footBackground: footStyle.backgroundColor,
+      footCellBackground: footCellStyle.backgroundColor
+    };
+  });
+  assert.equal(themedClock.customToggleChecked, false, "Selecting a preset theme should disable custom clock colors");
+  assert.match(themedClock.background, /rgb\(255,\s*59,\s*59\)/, "Preset theme should restore its own clock colors");
+  assert.doesNotMatch(themedClock.background, /rgb\(255,\s*0,\s*51\)/, "Custom clock color should not remain after selecting a preset theme");
+  assert.equal(themedClock.footDisplay, "grid", "Non-Matrix themes should still show the lower info text");
+  assert.equal(themedClock.footBorder, "none", "Lower info bar frame should be invisible");
+  assert.equal(themedClock.footBorderWidth, "0px", "Lower info bar border should be removed");
+  assert.equal(themedClock.footBackground, "rgba(0, 0, 0, 0)", "Lower info bar background should be transparent");
+  assert.equal(themedClock.footCellBackground, "rgba(0, 0, 0, 0)", "Lower info cells should be transparent");
 
   for (const theme of ["matrix", "bladerunner", "alien", "pinkie", "rainbow", "interstellar"]) {
     await page.getByTestId("tab-settings").click();

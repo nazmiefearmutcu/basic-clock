@@ -2,7 +2,7 @@
 set -euo pipefail
 
 MODE="${1:-run}"
-APP_NAME="Basic Clock"
+APP_NAME="Such A Good Clock"
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST_DIR="$ROOT_DIR/dist-native"
 
@@ -12,7 +12,7 @@ if [ ! -d "$ROOT_DIR/node_modules/electron" ]; then
   npm install
 fi
 
-pkill -f "Basic Clock.app/Contents/MacOS/Basic Clock" >/dev/null 2>&1 || true
+pkill -f "Such A Good Clock.app/Contents/MacOS/Such A Good Clock" >/dev/null 2>&1 || true
 
 build_app() {
   npm run desktop:build:dir -- --mac
@@ -26,7 +26,7 @@ open_app() {
   local app_bundle
   app_bundle="$(find_app)"
   if [ -z "$app_bundle" ]; then
-    echo "Basic Clock.app was not found in $DIST_DIR" >&2
+    echo "Such A Good Clock.app was not found in $DIST_DIR" >&2
     exit 1
   fi
   /usr/bin/open -n "$app_bundle"
@@ -34,7 +34,7 @@ open_app() {
 
 verify_app() {
   sleep 2
-  pgrep -f "Basic Clock.app/Contents/MacOS/Basic Clock" >/dev/null
+  pgrep -f "Such A Good Clock.app/Contents/MacOS/Such A Good Clock" >/dev/null
 }
 
 case "$MODE" in
@@ -50,7 +50,7 @@ case "$MODE" in
   --logs|logs)
     build_app
     open_app
-    /usr/bin/log stream --info --style compact --predicate 'process == "Basic Clock"'
+    /usr/bin/log stream --info --style compact --predicate 'process == "Such A Good Clock"'
     ;;
   --debug|debug)
     npm run desktop:run
@@ -58,7 +58,7 @@ case "$MODE" in
   --telemetry|telemetry)
     build_app
     open_app
-    /usr/bin/log stream --info --style compact --predicate 'process == "Basic Clock"'
+    /usr/bin/log stream --info --style compact --predicate 'process == "Such A Good Clock"'
     ;;
   *)
     echo "usage: $0 [run|--verify|--logs|--debug|--telemetry]" >&2

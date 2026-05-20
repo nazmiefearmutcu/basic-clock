@@ -1,12 +1,12 @@
-const CACHE_NAME = "basic-clock-v3";
+const CACHE_NAME = "such-a-good-clock-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./manifest.webmanifest",
-  "./icons/basic-clock-192.png",
-  "./icons/basic-clock-512.png"
+  "./icons/such-a-good-clock-192.png",
+  "./icons/such-a-good-clock-512.png"
 ];
 
 self.addEventListener("install", (event) => {

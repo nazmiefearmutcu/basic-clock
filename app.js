@@ -1,11 +1,11 @@
 /* ==========================================================
-   Basic Clock — app.js
+   Such A Good Clock — app.js
    Adds personalization (name, greeting, motto, accent, layout,
    date format, blink, fx toggle, scanlines) on top of the
    existing clock / alarms / timer / audio model.
    ========================================================== */
 
-const STORAGE_KEY = "basic-clock-en-v1";
+const STORAGE_KEY = "such-a-good-clock-en-v1";
 
 const ACCENT_OPTIONS = {
   matrix:       ["#39ff88", "#7af0ff", "#f5ff7a", "#ff8aff"],
@@ -500,8 +500,8 @@ function updateClock(now = new Date()) {
   }
   // Title for tab
   document.title = state.settings.hour12
-    ? `${pad(h)}:${pad(m)}${suffix} · Basic Clock`
-    : `${pad(h)}:${pad(m)} · Basic Clock`;
+    ? `${pad(h)}:${pad(m)}${suffix} · Such A Good Clock`
+    : `${pad(h)}:${pad(m)} · Such A Good Clock`;
 
   // Date
   el.dateLabel.textContent = formatDate(now);

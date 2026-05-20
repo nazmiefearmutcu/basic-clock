@@ -55,5 +55,5 @@ jobs:
       - name: Upload desktop artifact
         uses: actions/upload-artifact@v4
         with:
-          name: basic-clock-${{ matrix.name }}
+          name: such-a-good-clock-${{ matrix.name }}
           path: dist-native/**

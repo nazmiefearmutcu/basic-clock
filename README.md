@@ -1,14 +1,15 @@
-# Basic Clock
+# Such A Good Clock
 
-Professional responsive digital clock, alarm, countdown timer, and native desktop app with in-browser Web Audio alerts.
+Personalized responsive clock, alarm, countdown timer, and native desktop app with cinematic themes, custom clock colors, saved preferences, and in-browser Web Audio alerts.
 
 ## Features
 
-- Full-width digital clock with local date and timezone.
+- Full-width digital clock with local date, timezone, and saved display preferences.
 - Clock, Alarms, Timer, and Settings pages.
 - Six visual themes: Matrix, 2049, Alien, Pinkie, Rainbow, and Interstellar.
 - Theme cards with live previews, cinematic backgrounds, and rotating theme-specific quote lines.
 - Custom three-stop clock color palette with separate top, middle, and bottom color controls.
+- Personal greeting controls with name, time-based greetings, custom motto, or a clean no-greeting mode.
 - Daily alarms plus quick one-time alarms for +1 minute, +10 minutes, and +5 second testing.
 - Alarm popup follows the user across pages and supports stop plus 5 minute snooze.
 - Countdown timer with a 3 second test flow.
@@ -22,19 +23,19 @@ Professional responsive digital clock, alarm, countdown timer, and native deskto
 Use the live app:
 
 ```text
-https://nazmiefearmutcu.github.io/basic-clock/
+https://nazmiefearmutcu.github.io/such-a-good-clock/
 ```
 
-On supported desktop and mobile browsers, use the browser's install option to add Basic Clock as an app shortcut.
+On supported desktop and mobile browsers, use the browser's install option to add Such A Good Clock as an app shortcut.
 
 ## Native Apps
 
-The repository includes an Electron desktop shell that packages the same Basic Clock web app as a native desktop application.
+The repository includes an Electron desktop shell that packages the same Such A Good Clock web app as a native desktop application.
 
 Open the installed macOS app:
 
 ```bash
-open "/Applications/Basic Clock.app"
+open "/Applications/Such A Good Clock.app"
 ```
 
 Run the native app locally:
@@ -72,6 +73,6 @@ npm install
 npm run test:e2e
 ```
 
-The automated test verifies the custom clock color palette, checks all themes for clock fit, switches to the Interstellar theme, verifies quote cycling and logo-to-home navigation, creates one alarm and one timer, verifies that both trigger Web Audio sound events, and writes a screenshot to `test-results/basic-clock-e2e.png`.
+The automated test verifies the custom clock color palette, checks all themes for clock fit, switches to the Interstellar theme, verifies quote cycling and logo-to-home navigation, creates one alarm and one timer, verifies that both trigger Web Audio sound events, and writes a screenshot to `test-results/such-a-good-clock-e2e.png`.
 
 Current manual and automated coverage is tracked in `TEST_PLAN.md`.

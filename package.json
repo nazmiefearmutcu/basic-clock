@@ -1,14 +1,14 @@
 {
-  "name": "basic-clock",
+  "name": "such-a-good-clock",
   "version": "1.0.0",
-  "description": "A responsive digital clock with alarms, countdown timer, and Web Audio alerts.",
+  "description": "A personalized clock app with cinematic themes, custom clock colors, alarms, countdown timers, and Web Audio alerts.",
   "type": "module",
   "main": "desktop/main.cjs",
   "author": {
     "name": "Nazmi Efe Armutcu",
     "email": "nazmiefearmutcu@users.noreply.github.com"
   },
-  "homepage": "https://nazmiefearmutcu.github.io/basic-clock/",
+  "homepage": "https://nazmiefearmutcu.github.io/such-a-good-clock/",
   "scripts": {
     "serve": "python3 -m http.server 4173",
     "test:e2e": "node scripts/e2e.mjs",
@@ -25,8 +25,8 @@
     "electron-builder": "^26.8.1"
   },
   "build": {
-    "appId": "com.nazmiefearmutcu.basic-clock",
-    "productName": "Basic Clock",
+    "appId": "com.nazmiefearmutcu.such-a-good-clock",
+    "productName": "Such A Good Clock",
     "asar": true,
     "directories": {
       "output": "dist-native"
@@ -43,7 +43,7 @@
     ],
     "mac": {
       "category": "public.app-category.utilities",
-      "icon": "icons/basic-clock.icns",
+      "icon": "icons/such-a-good-clock.icns",
       "identity": null,
       "target": [
         "dmg",
@@ -51,7 +51,7 @@
       ]
     },
     "win": {
-      "icon": "icons/basic-clock.ico",
+      "icon": "icons/such-a-good-clock.ico",
       "target": [
         "nsis",
         "portable",

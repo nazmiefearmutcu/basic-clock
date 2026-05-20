@@ -141,7 +141,7 @@ try {
   await page.waitForSelector("[data-testid='ring-dialog'][open]", { timeout: 2_000 });
 
   await mkdir(join(root, "test-results"), { recursive: true });
-  await page.screenshot({ path: join(root, "test-results", "basic-clock-e2e.png"), fullPage: true });
+  await page.screenshot({ path: join(root, "test-results", "such-a-good-clock-e2e.png"), fullPage: true });
 
   const result = await page.evaluate(() => ({
     audioStatus: document.querySelector("[data-testid='audio-status']").textContent,

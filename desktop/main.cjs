@@ -1,7 +1,7 @@
 const { app, BrowserWindow, Menu, shell } = require("electron");
 const path = require("node:path");
 
-const APP_NAME = "Basic Clock";
+const APP_NAME = "Such A Good Clock";
 const APP_URL = path.join(__dirname, "..", "index.html");
 
 function createWindow() {
@@ -12,7 +12,7 @@ function createWindow() {
     minHeight: 640,
     title: APP_NAME,
     backgroundColor: "#08141f",
-    icon: path.join(__dirname, "..", "icons", "basic-clock-512.png"),
+    icon: path.join(__dirname, "..", "icons", "such-a-good-clock-512.png"),
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,

@@ -54,6 +54,42 @@ try {
   await page.waitForFunction(() => document.querySelector(".topbar").getBoundingClientRect().height > 60);
   await page.getByTestId("topbar-autohide-toggle").uncheck();
   await page.waitForFunction(() => document.documentElement.dataset.topbar === "fixed");
+
+  const setColor = async (testId, color) => {
+    await page.getByTestId(testId).evaluate((input, nextColor) => {
+      input.value = nextColor;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }, color.toLowerCase());
+  };
+  await page.getByTestId("clock-custom-colors-toggle").check();
+  await setColor("clock-color-1", "#ff0033");
+  await setColor("clock-color-2", "#33ff66");
+  await setColor("clock-color-3", "#3366ff");
+  await page.waitForFunction(() => document.documentElement.dataset.clockColors === "custom");
+  await page.getByTestId("brand-home").click();
+  await page.waitForFunction(() => document.querySelector("#clock").classList.contains("active"));
+  const customClock = await page.evaluate(() => {
+    const rootStyle = getComputedStyle(document.documentElement);
+    const clockStyle = getComputedStyle(document.querySelector("#digitalClock"));
+    const sepStyle = getComputedStyle(document.querySelector("#digitalClock .ck-sep"));
+    return {
+      colors: ["--clock-custom-1", "--clock-custom-2", "--clock-custom-3"].map((name) => rootStyle.getPropertyValue(name).trim()),
+      background: clockStyle.backgroundImage,
+      separatorColor: sepStyle.getPropertyValue("-webkit-text-fill-color") || sepStyle.color,
+      overflow: Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth)
+    };
+  });
+  assert.deepEqual(customClock.colors, ["#ff0033", "#33ff66", "#3366ff"], "Custom clock colors were not applied to CSS variables");
+  assert.match(customClock.background, /rgb\(255,\s*0,\s*51\)/, "Clock gradient did not include the top custom color");
+  assert.match(customClock.background, /rgb\(51,\s*255,\s*102\)/, "Clock gradient did not include the middle custom color");
+  assert.match(customClock.background, /rgb\(51,\s*102,\s*255\)/, "Clock gradient did not include the bottom custom color");
+  assert.match(customClock.separatorColor, /rgb\(51,\s*255,\s*102\)/, "Clock separators did not use the middle custom color");
+  assert.equal(customClock.overflow, 0, "Custom clock colors should not create horizontal overflow");
+  await page.getByTestId("tab-settings").click();
+  await page.getByTestId("clock-custom-colors-toggle").uncheck();
+  await page.waitForFunction(() => document.documentElement.dataset.clockColors === "theme");
+
   for (const theme of ["matrix", "bladerunner", "alien", "pinkie", "rainbow", "interstellar"]) {
     await page.getByTestId("tab-settings").click();
     await page.locator(`[data-theme-pick="${theme}"]`).click();

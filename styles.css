@@ -661,10 +661,24 @@ label > span {
   font-weight: 600;
   color: var(--muted);
 }
+.field-label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  font-family: var(--font-head);
+  margin-bottom: 6px;
+}
 [data-theme="bladerunner"] label > span { letter-spacing: 0.18em; }
 [data-theme="alien"] label > span { letter-spacing: 0.18em; color: var(--accent); }
 [data-theme="pinkie"] label > span { text-transform: none; letter-spacing: 0.01em; font-size: 0.9rem; color: var(--accent); font-weight: 600; }
 [data-theme="rainbow"] label > span { letter-spacing: 0.14em; color: var(--accent-2); }
+[data-theme="bladerunner"] .field-label { letter-spacing: 0.18em; }
+[data-theme="alien"] .field-label { letter-spacing: 0.18em; color: var(--accent); }
+[data-theme="pinkie"] .field-label { text-transform: none; letter-spacing: 0.01em; font-size: 0.9rem; color: var(--accent); font-weight: 600; font-family: var(--font-ui); }
+[data-theme="rainbow"] .field-label { letter-spacing: 0.14em; color: var(--accent-2); }
 
 input[type="range"] {
   -webkit-appearance: none;
@@ -855,6 +869,22 @@ input[type="checkbox"] {
 [data-theme="interstellar"] .digital-clock .ck-sep {
   -webkit-text-fill-color: #e8b76f;
   color: #e8b76f;
+  background: none;
+}
+
+[data-clock-colors="custom"] .digital-clock {
+  color: var(--clock-custom-2);
+  background: linear-gradient(180deg, var(--clock-custom-1) 0%, var(--clock-custom-2) 52%, var(--clock-custom-3) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 22px color-mix(in srgb, var(--clock-custom-2) 35%, transparent));
+  text-shadow: none;
+}
+
+[data-clock-colors="custom"] .digital-clock .ck-sep {
+  color: var(--clock-custom-2);
+  -webkit-text-fill-color: var(--clock-custom-2);
   background: none;
 }
 
@@ -1353,6 +1383,59 @@ input[type="checkbox"] {
   box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--c);
 }
 
+.color-setting {
+  align-self: end;
+}
+
+.clock-color-palette {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.color-picker {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 6px 8px 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+}
+
+.color-picker > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.color-picker input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.color-picker input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 3px;
+}
+
+.color-picker input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 999px;
+}
+
+.color-picker input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 999px;
+}
+
 /* ============================================================
    Ring dialog / toast
    ============================================================ */
@@ -1423,6 +1506,7 @@ input[type="checkbox"] {
   .form-grid, .settings-grid { grid-template-columns: 1fr; }
   .col-2 { grid-column: span 1; }
   .theme-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clock-color-palette { grid-template-columns: 1fr; }
   .clock-foot { grid-template-columns: 1fr; }
   .timer-inputs { grid-template-columns: 1fr; }
   .list-item { grid-template-columns: 1fr; }

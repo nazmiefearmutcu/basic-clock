@@ -272,6 +272,27 @@
                   <div class="swatches" id="accentSwatches" role="radiogroup" aria-label="Accent color"></div>
                 </label>
                 <label class="check-line">
+                  <input id="clockCustomColorToggle" type="checkbox" data-testid="clock-custom-colors-toggle" />
+                  <span>Custom clock colors</span>
+                </label>
+                <div class="col-2 color-setting">
+                  <span class="field-label">Clock color palette</span>
+                  <div class="clock-color-palette" aria-label="Clock color palette">
+                    <label class="color-picker">
+                      <span>Top</span>
+                      <input id="clockColor1" type="color" value="#ffffff" data-testid="clock-color-1" />
+                    </label>
+                    <label class="color-picker">
+                      <span>Middle</span>
+                      <input id="clockColor2" type="color" value="#e8b76f" data-testid="clock-color-2" />
+                    </label>
+                    <label class="color-picker">
+                      <span>Bottom</span>
+                      <input id="clockColor3" type="color" value="#8ec5ff" data-testid="clock-color-3" />
+                    </label>
+                  </div>
+                </div>
+                <label class="check-line">
                   <input id="fxToggle" type="checkbox" />
                   <span>Background effects</span>
                 </label>

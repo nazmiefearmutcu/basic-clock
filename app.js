@@ -132,6 +132,12 @@ const el = {
   fxToggle: document.getElementById("fxToggle"),
   scanlinesToggle: document.getElementById("scanlinesToggle"),
   topbarAutoHideToggle: document.getElementById("topbarAutoHideToggle"),
+  clockCustomColorToggle: document.getElementById("clockCustomColorToggle"),
+  clockColorInputs: [
+    document.getElementById("clockColor1"),
+    document.getElementById("clockColor2"),
+    document.getElementById("clockColor3")
+  ],
   resetSettings: document.getElementById("resetSettings"),
 
   ringDialog: document.getElementById("ringDialog"),
@@ -166,7 +172,9 @@ const defaults = {
     dateFormat: "long",
     fx: true,
     scanlines: true,
-    topbarAutoHide: false
+    topbarAutoHide: false,
+    customClockColors: false,
+    clockColors: ["#ffffff", "#e8b76f", "#8ec5ff"]
   },
   alarms: [],
   timer: {
@@ -186,8 +194,10 @@ function loadState() {
   try {
     const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (!parsed || typeof parsed !== "object") return structuredClone(defaults);
+    const settings = { ...defaults.settings, ...parsed.settings };
+    settings.clockColors = normalizeClockColors(settings.clockColors);
     return {
-      settings: { ...defaults.settings, ...parsed.settings },
+      settings,
       alarms: Array.isArray(parsed.alarms) ? parsed.alarms : [],
       timer: { ...defaults.timer, ...parsed.timer, running: false, endsAt: null }
     };
@@ -195,6 +205,18 @@ function loadState() {
 }
 function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 function uid() { return crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()); }
+
+function isHexColor(value) {
+  return typeof value === "string" && /^#[0-9a-f]{6}$/i.test(value);
+}
+
+function normalizeClockColors(value) {
+  const source = Array.isArray(value) ? value : [];
+  return defaults.settings.clockColors.map((fallback, index) => {
+    const candidate = source[index];
+    return isHexColor(candidate) ? candidate.toLowerCase() : fallback;
+  });
+}
 
 function showToast(message) {
   el.toast.textContent = message;
@@ -215,6 +237,12 @@ function applySettings() {
   el.html.dataset.showSeconds = s.showSeconds ? "on" : "off";
   el.html.dataset.blink = s.blink ? "on" : "off";
   el.html.dataset.topbar = s.topbarAutoHide ? "auto-hide" : "fixed";
+  const clockColors = normalizeClockColors(s.clockColors);
+  state.settings.clockColors = clockColors;
+  el.html.dataset.clockColors = s.customClockColors ? "custom" : "theme";
+  clockColors.forEach((color, index) => {
+    el.html.style.setProperty(`--clock-custom-${index + 1}`, color);
+  });
 
   // Accent override
   const accent = s.accent || THEME_DEFAULT_ACCENTS[s.theme];
@@ -238,6 +266,10 @@ function applySettings() {
   el.fxToggle.checked = s.fx;
   el.scanlinesToggle.checked = s.scanlines;
   el.topbarAutoHideToggle.checked = s.topbarAutoHide;
+  el.clockCustomColorToggle.checked = s.customClockColors;
+  el.clockColorInputs.forEach((input, index) => {
+    input.value = clockColors[index];
+  });
   el.dateFormat.value = s.dateFormat;
   el.displayName.value = s.displayName;
   el.greetingStyle.value = s.greetingStyle;
@@ -747,6 +779,21 @@ function bindEvents() {
   el.fxToggle.addEventListener("change", () => { state.settings.fx = el.fxToggle.checked; saveState(); applySettings(); });
   el.scanlinesToggle.addEventListener("change", () => { state.settings.scanlines = el.scanlinesToggle.checked; saveState(); applySettings(); });
   el.topbarAutoHideToggle.addEventListener("change", () => { state.settings.topbarAutoHide = el.topbarAutoHideToggle.checked; saveState(); applySettings(); });
+  el.clockCustomColorToggle.addEventListener("change", () => {
+    state.settings.customClockColors = el.clockCustomColorToggle.checked;
+    state.settings.clockColors = normalizeClockColors(state.settings.clockColors);
+    saveState();
+    applySettings();
+  });
+  el.clockColorInputs.forEach((input, index) => {
+    input.addEventListener("input", () => {
+      state.settings.clockColors = normalizeClockColors(state.settings.clockColors);
+      state.settings.clockColors[index] = input.value.toLowerCase();
+      state.settings.customClockColors = true;
+      saveState();
+      applySettings();
+    });
+  });
 
   el.resetSettings.addEventListener("click", () => {
     if (!confirm("Reset all settings (alarms and timer kept)?")) return;

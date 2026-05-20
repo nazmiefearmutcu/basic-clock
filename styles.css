@@ -789,8 +789,8 @@ input[type="checkbox"] {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter:
-    drop-shadow(3px 4px 0 #fff)
-    drop-shadow(6px 8px 0 #082138);
+    drop-shadow(2px 3px 0 #fff)
+    drop-shadow(4px 5px 0 #082138);
   text-shadow: none;
 }
 [data-theme="rainbow"] .digital-clock .ck-sep {
@@ -830,6 +830,12 @@ input[type="checkbox"] {
 [data-layout="minimal"] .clock-greeting,
 [data-layout="minimal"] .clock-foot { display: none; }
 [data-layout="minimal"] .digital-clock { font-size: clamp(6rem, 24vw, 24rem); }
+
+/* Rainbow uses a very wide display face and hard offset shadows, so it needs
+   its own fitted clock size after the layout rules have run. */
+[data-theme="rainbow"] .digital-clock {
+  font-size: clamp(3rem, 17vw, 16rem);
+}
 
 /* Clock foot strip */
 .clock-foot {
@@ -1369,8 +1375,9 @@ input[type="checkbox"] {
   .clock-foot { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
-  .topbar { flex-direction: column; align-items: stretch; }
-  .tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .topbar { flex-direction: column; align-items: stretch; padding-inline: 12px; }
+  .tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+  .tab { min-width: 0; padding-inline: 6px; font-size: 0.78rem; }
   .section-head { flex-direction: column; align-items: stretch; }
   .form-grid, .settings-grid { grid-template-columns: 1fr; }
   .col-2 { grid-column: span 1; }

@@ -45,13 +45,15 @@ try {
   await page.evaluate(() => window.__clockAppTest.clear());
 
   await page.getByTestId("tab-settings").click();
+  assert.equal(await page.locator("[data-theme-pick]").count(), 6, "Expected six uploaded theme cards");
   await page.getByTestId("theme-card-interstellar").click();
   await page.waitForFunction(() => document.documentElement.dataset.theme === "interstellar");
   await page.getByTestId("brand-home").click();
   await page.waitForFunction(() => document.querySelector("#clock").classList.contains("active"));
-  const firstQuote = await page.getByTestId("quote-block").textContent();
-  await page.getByTestId("quote-block").click();
-  const secondQuote = await page.getByTestId("quote-block").textContent();
+  const firstQuote = await page.locator("#greetingName").textContent();
+  await page.locator("#greetingName").click();
+  await page.waitForFunction((previous) => document.querySelector("#greetingName")?.textContent !== previous, firstQuote);
+  const secondQuote = await page.locator("#greetingName").textContent();
   assert.notEqual(firstQuote, secondQuote, "Theme quote did not cycle on click");
 
   await page.getByTestId("tab-alarms").click();

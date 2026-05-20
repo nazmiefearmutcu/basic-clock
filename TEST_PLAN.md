@@ -5,7 +5,7 @@
 - Digital clock renders local date, local timezone, and live time.
 - Navigation works across Clock, Alarms, Timer, and Settings.
 - The Basic Clock logo returns the user to the Clock home page.
-- The Settings page renders six theme cards: Matrix, Interstellar, Midnight, Aurora, Paper, and Ember.
+- The Settings page renders six theme cards: Matrix, 2049, Alien, Pinkie, Rainbow, and Interstellar.
 - Theme changes update the full app shell, clock styling, card selection, and theme-specific quote layer.
 - The theme quote layer rotates automatically and can be advanced by clicking it.
 - Alarm creation, upcoming-alarm selection, popup behavior, stop, and snooze work.

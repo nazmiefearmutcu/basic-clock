@@ -6,7 +6,7 @@ Professional responsive digital clock, alarm, countdown timer, and native deskto
 
 - Full-width digital clock with local date and timezone.
 - Clock, Alarms, Timer, and Settings pages.
-- Six visual themes: Matrix, Interstellar, Midnight, Aurora, Paper, and Ember.
+- Six visual themes: Matrix, 2049, Alien, Pinkie, Rainbow, and Interstellar.
 - Theme cards with live previews, cinematic backgrounds, and rotating theme-specific quote lines.
 - Daily alarms plus quick one-time alarms for +1 minute, +10 minutes, and +5 second testing.
 - Alarm popup follows the user across pages and supports stop plus 5 minute snooze.

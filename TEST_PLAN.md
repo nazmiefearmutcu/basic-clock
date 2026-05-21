@@ -11,6 +11,7 @@
 - Custom clock colors expose three color controls: top, middle, and bottom.
 - Custom clock colors override the digital clock across every theme while preserving theme backgrounds and layout.
 - Matrix is the default theme and hides the lower info bar.
+- The default launch configuration uses Matrix, split layout, 24-hour time, seconds on, steady colon, full volume, bell alarm audio, triple timer audio, and auto-hiding top tabs.
 - Non-Matrix themes show lower info text without a visible frame, panel fill, or separator effect.
 - The theme quote layer rotates automatically and can be advanced by clicking it.
 - Alarm creation, upcoming-alarm selection, popup behavior, stop, and snooze work.
@@ -22,20 +23,21 @@
 ## Acceptance Tests Run Locally
 
 1. Open the app and confirm the main clock fills the viewport horizontally and updates every second.
-2. Open Settings, choose Interstellar, and confirm the document theme switches.
-3. Enable custom clock colors and assign top, middle, and bottom colors.
-4. Confirm the clock uses the custom gradient and the separators use the middle color.
-5. Select a preset theme and confirm custom clock colors turn off automatically.
-6. Confirm Matrix hides the lower info bar and other themes keep the lower info text without a visible frame.
-7. Click the Such A Good Clock logo and confirm the Clock page becomes active.
-8. Click the quote layer and confirm the quote text changes.
-9. Enable audio with the "Enable audio" button and confirm status changes to "Ready".
-10. Add the built-in "Test alarm +5 sec" alarm.
-11. Wait until the alarm popup opens, confirm the alarm sound event is emitted, then click "Stop".
-12. Open the Timer page and start "3 sec test timer".
-13. Wait until the timer popup opens and confirm the timer sound event is emitted.
-14. Confirm no page errors are thrown during the flow.
-15. Capture a screenshot at `test-results/such-a-good-clock-e2e.png`.
+2. Confirm the first-run defaults match the installed app settings: Matrix, split layout, seconds on, steady colon, full volume, bell alarm sound, triple timer sound, background effects on, scanlines on, and top tabs auto-hide.
+3. Open Settings, choose Interstellar, and confirm the document theme switches.
+4. Enable custom clock colors and assign top, middle, and bottom colors.
+5. Confirm the clock uses the custom gradient and the separators use the middle color.
+6. Select a preset theme and confirm custom clock colors turn off automatically.
+7. Confirm Matrix hides the lower info bar and other themes keep the lower info text without a visible frame.
+8. Click the Such A Good Clock logo and confirm the Clock page becomes active.
+9. Click the quote layer and confirm the quote text changes.
+10. Enable audio with the "Enable audio" button and confirm status changes to "Ready".
+11. Add the built-in "Test alarm +5 sec" alarm.
+12. Wait until the alarm popup opens, confirm the alarm sound event is emitted, then click "Stop".
+13. Open the Timer page and start "3 sec test timer".
+14. Wait until the timer popup opens and confirm the timer sound event is emitted.
+15. Confirm no page errors are thrown during the flow.
+16. Capture a screenshot at `test-results/such-a-good-clock-e2e.png`.
 
 ## Visual and Interaction Checks
 

@@ -2,6 +2,14 @@
 
 Personalized responsive clock, alarm, countdown timer, and native desktop app with cinematic themes, custom clock colors, saved preferences, and in-browser Web Audio alerts.
 
+## Preview
+
+| Matrix clock home | Theme studio |
+| --- | --- |
+| ![Such A Good Clock Matrix home screen](docs/screenshots/matrix-clock-home.png) | ![Such A Good Clock Matrix theme settings](docs/screenshots/matrix-theme-studio.png) |
+
+Such A Good Clock opens directly into a polished Matrix-inspired clock by default: split layout, live seconds, steady colon, full-volume Web Audio, auto-hiding top tabs, background effects, and CRT scanlines. From there, users can switch between cinematic themes, tune the clock with a three-color palette, save personal greetings, set alarms, and run countdown timers in the browser or as a native desktop app.
+
 ## Features
 
 - Full-width digital clock with local date, timezone, and saved display preferences.

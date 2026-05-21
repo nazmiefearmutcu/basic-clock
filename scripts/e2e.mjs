@@ -39,6 +39,11 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 980 } });
 const pageErrors = [];
 page.on("pageerror", (error) => pageErrors.push(error.message));
 
+const revealTopbar = async () => {
+  await page.mouse.move(720, 5);
+  await page.waitForFunction(() => document.querySelector(".topbar").getBoundingClientRect().height > 60);
+};
+
 try {
   await page.goto(`http://${host}:${port}`, { waitUntil: "networkidle" });
   await page.waitForFunction(() => Boolean(window.__clockAppTest));
@@ -47,20 +52,24 @@ try {
   const defaultClock = await page.evaluate(() => ({
     theme: document.documentElement.dataset.theme,
     clockColors: document.documentElement.dataset.clockColors,
-    footDisplay: getComputedStyle(document.querySelector(".clock-foot")).display
+    footDisplay: getComputedStyle(document.querySelector(".clock-foot")).display,
+    topbar: document.documentElement.dataset.topbar,
+    blink: document.documentElement.dataset.blink,
+    volume: document.querySelector("#volumeRange").value
   }));
   assert.equal(defaultClock.theme, "matrix", "Default theme should be Matrix");
   assert.equal(defaultClock.clockColors, "theme", "Default clock colors should follow the selected theme");
   assert.equal(defaultClock.footDisplay, "none", "Matrix should hide the lower info bar");
+  assert.equal(defaultClock.topbar, "auto-hide", "Default top tabs should auto-hide");
+  assert.equal(defaultClock.blink, "off", "Default colon blink should be off");
+  assert.equal(defaultClock.volume, "1", "Default volume should match the installed app configuration");
+
+  await page.mouse.move(720, 420);
+  await page.waitForFunction(() => document.querySelector(".topbar").getBoundingClientRect().height <= 14);
+  await revealTopbar();
 
   await page.getByTestId("tab-settings").click();
   assert.equal(await page.locator("[data-theme-pick]").count(), 6, "Expected six uploaded theme cards");
-  await page.getByTestId("topbar-autohide-toggle").check();
-  await page.waitForFunction(() => document.documentElement.dataset.topbar === "auto-hide");
-  await page.mouse.move(720, 420);
-  await page.waitForFunction(() => document.querySelector(".topbar").getBoundingClientRect().height <= 14);
-  await page.mouse.move(720, 5);
-  await page.waitForFunction(() => document.querySelector(".topbar").getBoundingClientRect().height > 60);
   await page.getByTestId("topbar-autohide-toggle").uncheck();
   await page.waitForFunction(() => document.documentElement.dataset.topbar === "fixed");
 

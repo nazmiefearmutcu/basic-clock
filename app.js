@@ -170,9 +170,9 @@ const defaults = {
     accent: null, // null → use theme default
     hour12: false,
     showSeconds: true,
-    blink: true,
+    blink: false,
     muted: false,
-    volume: 0.72,
+    volume: 1,
     defaultAlarmSound: "bell",
     defaultTimerSound: "triple",
     displayName: "",
@@ -181,7 +181,7 @@ const defaults = {
     dateFormat: "long",
     fx: true,
     scanlines: true,
-    topbarAutoHide: false,
+    topbarAutoHide: true,
     customClockColors: false,
     clockColors: THEME_CLOCK_COLORS.matrix
   },

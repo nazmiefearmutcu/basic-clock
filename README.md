@@ -4,11 +4,23 @@ Personalized responsive clock, alarm, countdown timer, and native desktop app wi
 
 ## Preview
 
-| Matrix clock home | Theme studio |
-| --- | --- |
-| ![Such A Good Clock Matrix home screen](docs/screenshots/matrix-clock-home.png) | ![Such A Good Clock Matrix theme settings](docs/screenshots/matrix-theme-studio.png) |
+> Live demo: **https://nazmiefearmutcu.github.io/such-a-good-clock/**
 
-Such A Good Clock opens directly into a polished Matrix-inspired clock by default: split layout, live seconds, steady colon, full-volume Web Audio, auto-hiding top tabs, background effects, and CRT scanlines. From there, users can switch between cinematic themes, tune the clock with a three-color palette, save personal greetings, set alarms, and run countdown timers in the browser or as a native desktop app.
+### Cinematic themes — pick one, change anytime
+
+| Matrix | 2049 | Alien |
+| --- | --- | --- |
+| ![Matrix theme](docs/screenshots/theme-matrix.png) | ![Blade Runner 2049 theme](docs/screenshots/theme-bladerunner.png) | ![Alien theme](docs/screenshots/theme-alien.png) |
+| Pinkie | Rainbow | Interstellar |
+| ![Pinkie theme](docs/screenshots/theme-pinkie.png) | ![Rainbow theme](docs/screenshots/theme-rainbow.png) | ![Interstellar theme](docs/screenshots/theme-interstellar.png) |
+
+### Functional surfaces
+
+| Theme studio | Timer | Alarms |
+| --- | --- | --- |
+| ![Theme picker with live previews](docs/screenshots/settings-theme-picker.png) | ![Countdown timer with Pomodoro presets](docs/screenshots/timer.png) | ![Alarms page](docs/screenshots/alarms.png) |
+
+Such A Good Clock opens directly into a polished Matrix-inspired clock by default: split layout, live seconds, steady colon, full-volume Web Audio, auto-hiding top tabs, background effects, and CRT scanlines. From there, users can switch between six cinematic themes (above), tune the clock with a three-color palette, save personal greetings, set alarms, and run countdown timers in the browser or as a native desktop app.
 
 ## Features
 

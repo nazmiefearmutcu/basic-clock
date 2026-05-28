@@ -14,19 +14,36 @@
 
 ![Such A Good Clock cycling through all six themes — Matrix, 2049, Alien, Pinkie, Interstellar, Rainbow](docs/screenshots/theme-cycle.gif)
 
-### Cinematic themes — pick one, change anytime
+### Cinematic themes
 
-| Matrix | 2049 | Alien |
-| --- | --- | --- |
-| ![Matrix theme](docs/screenshots/theme-matrix.png) | ![Blade Runner 2049 theme](docs/screenshots/theme-bladerunner.png) | ![Alien theme](docs/screenshots/theme-alien.png) |
-| Pinkie | Rainbow | Interstellar |
-| ![Pinkie theme](docs/screenshots/theme-pinkie.png) | ![Rainbow theme](docs/screenshots/theme-rainbow.png) | ![Interstellar theme](docs/screenshots/theme-interstellar.png) |
+#### Matrix
+![Matrix theme — phosphor green CRT, digital rain, monospace digits with a rotating Matrix quote](docs/screenshots/theme-matrix.png)
+
+#### 2049 (Blade Runner 2049)
+![Blade Runner 2049 theme — amber serif digits with chromatic shadow on warm sepia background](docs/screenshots/theme-bladerunner.png)
+
+#### Alien (Nostromo amber CRT)
+![Alien theme — amber phosphor CRT digits with a hard inner glow, mono spacing, Nostromo aesthetic](docs/screenshots/theme-alien.png)
+
+#### Pinkie
+![Pinkie theme — bubblegum pink gradient digits with hard cartoon shadow on soft pink background](docs/screenshots/theme-pinkie.png)
+
+#### Rainbow
+![Rainbow theme — rainbow gradient digits with white drop shadow on cyan-to-mint sky background](docs/screenshots/theme-rainbow.png)
+
+#### Interstellar
+![Interstellar theme — thin elegant white-gold digits with calm warm glow on deep space background](docs/screenshots/theme-interstellar.png)
 
 ### Functional surfaces
 
-| Theme studio | Timer | Alarms |
-| --- | --- | --- |
-| ![Theme picker with live previews](docs/screenshots/settings-theme-picker.png) | ![Countdown timer with Pomodoro presets](docs/screenshots/timer.png) | ![Alarms page](docs/screenshots/alarms.png) |
+#### Theme studio
+![Theme picker with live previews for all six themes, layout segmented control, three-color clock palette, and accent swatch grid](docs/screenshots/settings-theme-picker.png)
+
+#### Timer
+![Countdown timer with five preset durations (1m / 5m / 10m / 25m / 45m), three-second test button, progress bar, and start / pause / reset controls](docs/screenshots/timer.png)
+
+#### Alarms
+![Alarms page with time + label + sound form, quick +1m / +10m / test buttons, and a list of saved daily alarms](docs/screenshots/alarms.png)
 
 Such A Good Clock opens directly into a polished Matrix-inspired clock by default: split layout, live seconds, steady colon, full-volume Web Audio, auto-hiding top tabs, background effects, and CRT scanlines. From there, users can switch between six cinematic themes (above), tune the clock with a three-color palette, save personal greetings, set alarms, and run countdown timers in the browser or as a native desktop app.
 

@@ -12,6 +12,8 @@ Personalized responsive clock, alarm, countdown timer, and native desktop app wi
 
 > Live demo: **https://nazmiefearmutcu.github.io/such-a-good-clock/**
 
+![Such A Good Clock cycling through all six themes — Matrix, 2049, Alien, Pinkie, Interstellar, Rainbow](docs/screenshots/theme-cycle.gif)
+
 ### Cinematic themes — pick one, change anytime
 
 | Matrix | 2049 | Alien |

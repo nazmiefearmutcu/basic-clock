@@ -8,6 +8,43 @@
 
 **A clock you'd actually want fullscreen on a spare monitor.** Six cinematic themes, alarms, countdown timers, custom three-color clock styling, Web Audio alerts. Runs as a browser PWA (offline-capable) or as a native macOS / Windows / Linux desktop app.
 
+## Download
+
+<p align="left">
+  <a href="https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock-1.0.0-arm64.dmg">
+    <img alt="Download for macOS (Apple Silicon, .dmg)" src="https://img.shields.io/badge/macOS_Apple_Silicon-Download_.dmg-1d1d1f?logo=apple&logoColor=white&style=for-the-badge" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock.Setup.1.0.0.exe">
+    <img alt="Download for Windows (.exe installer)" src="https://img.shields.io/badge/Windows-Download_.exe-0078d6?logo=windows&logoColor=white&style=for-the-badge" />
+  </a>
+  &nbsp;
+  <a href="https://nazmiefearmutcu.github.io/such-a-good-clock/">
+    <img alt="Open the browser version, no install needed" src="https://img.shields.io/badge/Browser-No_install-2ea043?style=for-the-badge&logo=googlechrome&logoColor=white" />
+  </a>
+</p>
+
+After dragging Such A Good Clock to your `/Applications` folder, the first
+launch shows a one-time *"downloaded from the internet"* prompt — that's
+macOS Gatekeeper. The app is unsigned (every byte of source is right here
+on GitHub), so right-click → **Open** the first time to confirm. Subsequent
+launches behave like any other app.
+
+<details>
+<summary>Linux + alternate downloads</summary>
+
+| Platform | File | Size |
+| --- | --- | --- |
+| Linux AppImage | [`Such.A.Good.Clock-1.0.0.AppImage`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock-1.0.0.AppImage) | 121 MB |
+| Linux Debian/Ubuntu | [`such-a-good-clock_1.0.0_amd64.deb`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/such-a-good-clock_1.0.0_amd64.deb) | 94 MB |
+| Linux tarball | [`such-a-good-clock-1.0.0.tar.gz`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/such-a-good-clock-1.0.0.tar.gz) | 114 MB |
+| Apple Silicon Mac (zip) | [`Such.A.Good.Clock-1.0.0-arm64-mac.zip`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock-1.0.0-arm64-mac.zip) | 111 MB |
+| Windows portable | [`Such.A.Good.Clock.1.0.0.exe`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock.1.0.0.exe) | 100 MB |
+
+Or browse [all releases](https://github.com/nazmiefearmutcu/such-a-good-clock/releases).
+
+</details>
+
 ## Preview
 
 > Live demo: **https://nazmiefearmutcu.github.io/such-a-good-clock/**

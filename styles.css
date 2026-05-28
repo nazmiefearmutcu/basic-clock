@@ -31,6 +31,7 @@
 
   --clock-tracking: 0.04em;
   --clock-weight: 400;
+  --clock-size-scale: 1;       /* baseline (VT323) */
   --clock-shadow:
     0 0 4px rgba(57, 255, 136, 0.9),
     0 0 18px rgba(57, 255, 136, 0.55),
@@ -65,6 +66,7 @@
 
   --clock-tracking: -0.02em;
   --clock-weight: 900;
+  --clock-size-scale: 0.95;    /* Big Shoulders Display is monumental — slight scale-down */
   --clock-shadow:
     0 0 24px rgba(255, 122, 26, 0.55),
     0 0 60px rgba(255, 90, 20, 0.30);
@@ -94,6 +96,7 @@
 
   --clock-tracking: 0.06em;
   --clock-weight: 400;
+  --clock-size-scale: 1.05;    /* Share Tech Mono is slim — slight scale-up */
   --clock-shadow:
     0 0 8px rgba(255, 176, 0, 0.9),
     0 0 28px rgba(255, 140, 0, 0.45);
@@ -123,6 +126,7 @@
 
   --clock-tracking: -0.02em;
   --clock-weight: 400;
+  --clock-size-scale: 0.90;    /* Lilita One is bubbly-fat — scale down to match */
   --clock-shadow:
     4px 6px 0 rgba(255, 78, 168, 0.25),
     0 0 50px rgba(255, 78, 168, 0.25);
@@ -152,6 +156,7 @@
 
   --clock-tracking: -0.02em;
   --clock-weight: 400;
+  --clock-size-scale: 0.85;    /* Bowlby One is chunkiest of all — biggest scale-down */
   --clock-shadow: none;
   --eyebrow-prefix: "» ";
 }
@@ -179,6 +184,7 @@
 
   --clock-tracking: 0.06em;
   --clock-weight: 200;
+  --clock-size-scale: 1.10;    /* Saira weight 200 is thin — scale up to match presence */
   --clock-shadow:
     0 0 24px rgba(232, 183, 111, 0.25),
     0 0 80px rgba(232, 183, 111, 0.15);
@@ -767,7 +773,7 @@ input[type="checkbox"] {
   color: var(--text);
   text-shadow: var(--clock-shadow);
   font-variant-numeric: tabular-nums;
-  font-size: clamp(5rem, 19vw, 19rem);
+  font-size: calc(clamp(5rem, 19vw, 19rem) * var(--clock-size-scale, 1));
   display: flex;
   align-items: baseline;
   justify-content: center;

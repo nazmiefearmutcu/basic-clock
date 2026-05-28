@@ -1,6 +1,6 @@
 {
   "name": "such-a-good-clock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A personalized clock app with cinematic themes, custom clock colors, alarms, countdown timers, and Web Audio alerts.",
   "type": "module",
   "main": "desktop/main.cjs",

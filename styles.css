@@ -909,9 +909,11 @@ input[type="checkbox"] {
 [data-layout="minimal"] .digital-clock { font-size: clamp(6rem, 24vw, 24rem); }
 
 /* Theme display faces and shadows have different visual widths. Keep the main
-   clock fitted after layout-specific sizing has run. */
+   clock fitted after layout-specific sizing has run, but still honour the
+   per-theme --clock-size-scale so rounded/chunky fonts (rainbow/pinkie)
+   don't appear disproportionately larger than thin ones (interstellar). */
 [data-theme] .digital-clock {
-  font-size: clamp(3rem, 17vw, 16rem);
+  font-size: calc(clamp(3rem, 17vw, 16rem) * var(--clock-size-scale, 1));
 }
 
 /* Clock foot strip */
